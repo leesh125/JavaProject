@@ -39,6 +39,7 @@ public class EscapeChar {
 		System.out.println('\'');
 		
 		System.out.println("문자열 역슬래쉬 \\n 사용");
+		System.out.println("윈도우 운영체제에서 파일 /디렉터리 경로 표시할 때 많이 사용");
 		
 
 	}
