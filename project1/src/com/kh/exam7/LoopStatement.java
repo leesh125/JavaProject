@@ -60,14 +60,66 @@ public class LoopStatement {
 		}
 	}
 	
+	public static void sample8() {
+		for(int i = 1; i <= 9; i++) {
+			for(int j=1; j <= 9; j++) {
+				System.out.println(i + "x " + j + " = " + i*j);
+			}
+		}
+	}
+	
+	public static void sample9() {
+		/*
+		 *  다음과 같은 모양의 출력 결과가 나오게 하기 위한 중첩 반복
+		 *  
+		 *  *****
+		 *  *****
+		 *  *****
+		 *  *****
+		 *  *****
+		 */
+		
+		for(int i=0; i<5 ; i++) {
+			for(int j=0; j<5 ; j++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+	}
+	
+	public static void sample10() {
+		/*
+		 * A B C D E F
+		 * G H I J K L
+		 * M N O P Q R
+		 * S T U V W X
+		 * Y Z
+		 */
+		
+		char c = 'A';
+		
+		for(int i=0; i<5; i++) {
+			for(int j=0; j<6; j++) {
+				System.out.print(c++ +" ");
+				if(c > 'Z') break;
+			}
+			System.out.println();
+			
+		}
+	}
+	
 	public static void main(String[] args) {
-		sample1();
-		sample2();
-		sample3();
-		sample4();
-		sample5();
-		//sample6(); <- 무한 반복 메소드
-		sample7();
+//		sample1();
+//		sample2();
+//		sample3();
+//		sample4();
+//		sample5();
+//		//sample6(); <- 무한 반복 메소드
+//		sample7();
+//		sample8();
+//		sample9();
+		sample10();
+
 	}
 
 }

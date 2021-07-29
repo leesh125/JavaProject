@@ -1,6 +1,5 @@
 package com.kh.exam7;
 
-import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class PracFor {
@@ -305,7 +304,36 @@ public class PracFor {
 		
 	}
 	
-	
+	public static void ex10() {
+		/*
+		 * 출력을 다음과 같이 나오도록 한다.
+		 * 
+		 * 1 2 3 4 5 6 7
+		 * 8 9 10 11 12 13 14
+		 * 15 16 17 18 19 20 21
+		 * 22 23 24 25 26 27 28
+		 * 29 30 31 32 33 34 35
+		 * 36 37 38 39 40 41 42
+		 * 
+		 */
+		int num=1;
+		
+		for(int i=0; i<6 ; i++) {
+			for(int j=0; j<7; j++) {
+				System.out.printf("%2d ",num++);
+			}
+			System.out.println();
+		}
+		
+		System.out.println();
+		
+		for(int i=0; i<6; i++) {
+			for(int j=1; j<=7; j++) {
+				System.out.print((i*7) + j + " ");
+			}
+			System.out.println();
+		}
+	}
 
 	public static void main(String[] args) {
 //		ex1();
@@ -316,7 +344,8 @@ public class PracFor {
 //		ex6();
 //		ex7();
 //		ex8();
-		ex9();
+//		ex9();
+		ex10();
 
 	}
 
