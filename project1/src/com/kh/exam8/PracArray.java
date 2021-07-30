@@ -1,7 +1,6 @@
 package com.kh.exam8;
 
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class PracArray {
 
@@ -167,6 +166,7 @@ public class PracArray {
 	}
 	
 	public static void ex8() {
+		// 가위바위보 게임 -> 사용자 입력으로 사용자가 가위 또는 바위 또는 보를 입력하는 것만으로 동작.
 		String str[] = {"가위","바위","보"};
 		String me ="";
 		String com ="";
@@ -176,53 +176,173 @@ public class PracArray {
 			com = str[i];
 			
 			
-			System.out.print("가위, 바위, 보 중 입력 : ");
-			me = sc.nextLine();
+			System.out.print("가위, 바위, 보 중 입력(그만하고 싶은 z입력후 엔터) : ");
+			me = sc.nextLine();  
 			
+			if(me.equals("z")) break;
 				
 			
-			if(me == "가위") {
-				if(com == "가위") {
+			if(me.equals("가위")) {
+				if(i == 0) {
+					System.out.println("컴퓨터 : " + str[i] + ", 나 : 가위");
 					System.out.println("비김");
 				}
-				else if(com == "보") {
+				else if(i == 2) {
+					System.out.println("컴퓨터 : " + str[i] + ", 나 : 가위");
 					System.out.println("내가 이김!");
 				}
-				else if(com == "바위") {
+				else if(i == 1) {
+					System.out.println("컴퓨터 : " + str[i] + ", 나 : 가위");
 					System.out.println("내가 짐 ㅠ");
 				}
 			}
-			else if(me == "바위") {
+			else if(me.equals("바위")) {
 				if(com == "바위") {
+					System.out.println("컴퓨터 : " + str[i] + ", 나 : 바위");
 					System.out.println("비김");
 				}
 				else if(com == "가위") {
+					System.out.println("컴퓨터 : " + str[i] + ", 나 : 바위");
 					System.out.println("내가 이김!");
 				}
 				else if(com == "보") {
+					System.out.println("컴퓨터 : " + str[i] + ", 나 : 바위");
 					System.out.println("내가 짐 ㅠ");
 				}
 			}
-			else if(me == "보") {
+			else if(me.equals("보")) {
 				if(com == "보") {
+					System.out.println("컴퓨터 : " + str[i] + ", 나 : 보");
 					System.out.println("비김");
 				}
 				else if(com == "바위") {
+					System.out.println("컴퓨터 : " + str[i] + ", 나 : 보");
 					System.out.println("내가 이김!");
 				}
 				else if(com == "가위") {
+					System.out.println("컴퓨터 : " + str[i] + ", 나 : 보");
 					System.out.println("내가 짐 ㅠ");
 				}
+			}else {
+				System.out.println("가위, 바위, 보 중 입력!!\n");
+				continue;
 			}
 			
 			System.out.println("=================\n");
 		}
 		
 	}
-	
-	public static void main(String[] args) {
-		// 가위바위보 게임 -> 사용자 입력으로 사용자가 가위 또는 바위 또는 보를 입력하는 것만으로 동작.
+	public static void ex9() {
+		// 업앤 다운. -> 임의의 값을 하나 생성하고 사용자가 일정 범위의 정수값 안에서 정수를 입력하면
+		//            미리 생성된 값과 비교를 통해 업 또는 다운 으로 힌트를 주어 최종 생성값을 맞추는 게임.
+		int num, ran, max = 100, min = 1;
 		
+		while(true) {
+			System.out.println("업 앤 다운 게임 시작!\n");
+			
+			ran = rd.nextInt(100)+1;
+			
+			while(true) {
+				System.out.print(min + " ~ " + max + "사이의 수 입력 (그만하고 싶은 0입력후 엔터) :");
+				num = sc.nextInt();    sc.nextLine();
+				
+				if(num == 0) break;
+				
+				if(num < 1 && num > 100) {
+					System.out.println("1 ~ 100 사이 입력!!!\n");
+					continue;
+				}
+				
+				if(num > ran) {
+					System.out.println("다운\n");
+					max = num;
+					continue;
+				}else if( num < ran) {
+					System.out.println("업\n");
+					min = num;
+					continue;
+				}else if(num == ran) {
+					System.out.println("정답!! (임의의 수 : " + ran + " )\n" );
+					break;
+				}
+			}
+			
+			System.out.println("\n=================\n");
+			break;
+		}
+		System.out.println("게임 종료");
+	}
+	
+	public static void ex10() {
+		// 바쁜 직장인들을 위해 미리 선정된 점심 메뉴를 임의로 선택하여 제공하는 프로그램.
+		//     1. 미리 선정된 메뉴를 사용하여 임의로 제공.
+		//     2. 사용자가 직접 메뉴를 입력하여 임의의 메뉴가 선택될 수 있도록 제공.
+		
+		List<String> menu = new ArrayList<String>();
+		menu.add("짜장면");  menu.add("배떡");  menu.add("강준치");  
+		int heart, other = rd.nextInt(3);
+		int count = 0;
+		int ran = rd.nextInt(3);
+		String myMenu = "";
+		
+		while(true) {
+			System.out.println("오늘의 점심은 " + menu.get(ran) + " 입니다!");
+			while(true) {
+				System.out.print( menu.get(ran) + "이 맘에 들면 1, 맘에 들지 않으면 2, 메뉴 선택 혹은 추가는 3을 눌러주세요");
+				heart = sc.nextInt();   sc.nextLine();		
+				
+				if(heart == 1) {
+					System.out.println("오늘의 메뉴는 : " + menu.get(ran) + " 입니다.");
+					System.exit(0);
+				}else if(heart == 2) {
+					ran = (ran % 3) + 1;    count = (count % 3) + 1; 
+					
+					if(count >= 3) {
+						System.out.println("우리는 메뉴가 3개뿐입니다..\n");
+						continue;
+					}
+					
+					System.out.print("다른 추천 메뉴는 " );
+					
+					if(ran >= 3)
+						ran = 0;
+					
+					System.out.println(menu.get(ran) + "입니다.");
+					continue;
+				}else if(heart == 3) {
+					System.out.print("원하는 메뉴를 입력해주세요 :");
+					myMenu = sc.nextLine();
+					
+					if(myMenu.equals("강준치")) {
+						System.out.println("오늘의 메뉴는 강준치 입니다.");
+						System.exit(0);
+					}else if(myMenu.equals("배떡")) {
+						System.out.println("오늘의 메뉴는 배떡 입니다.");
+						System.exit(0);
+					}else if(myMenu.equals("짜장면")) {
+						System.out.println("오늘의 메뉴는 짜장면 입니다.");
+						System.exit(0);
+					}else {
+						menu.add(myMenu);
+						System.out.println(myMenu +"는 오늘부로 주문해서 내일 드실 수 있습니다.");
+						System.out.println("프로그램을 다시 시작해주세요.");
+						System.exit(0);
+					}
+					
+				}
+				System.out.println("오늘의 메뉴는  " + menu.get(ran) + " 입니다.");
+				break;
+			}
+			
+		}
+		
+		
+	}
+	public static void main(String[] args) {
+		
+				
+				
+				
 //		ex1();
 //		ex2();
 //		ex3();
@@ -230,7 +350,9 @@ public class PracArray {
 //		ex5();
 //		ex6();
 //		ex7();
-		ex8();
+//		ex8();
+//		ex9();
+		ex10();
 	}
 
 }
