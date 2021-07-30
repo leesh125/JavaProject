@@ -108,6 +108,18 @@ public class LoopStatement {
 		}
 	}
 	
+	public static void sample11() {
+		// break : 반복 종료
+		// continue	: 반복의 처음으로 이동.
+		
+		for(int i = 1; i <= 99; i++) {
+			if(i % 3 != 0) {
+				continue;
+			}
+			System.out.print(i + " ");
+		}
+	}
+	
 	public static void main(String[] args) {
 //		sample1();
 //		sample2();
@@ -118,7 +130,8 @@ public class LoopStatement {
 //		sample7();
 //		sample8();
 //		sample9();
-		sample10();
+//		sample10();
+		sample11();
 
 	}
 

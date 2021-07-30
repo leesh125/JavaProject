@@ -48,13 +48,27 @@ public class LoopStatement1 {
 		System.out.println("반복 끝");
 	}
 	
+	public static void sample6() {
+		// break : 반복 종료
+		// continue : 반복의 처음으로 이동
+		int i = 1;
+		while(i <= 99) {
+			if(i % 3 != 0) {
+				i++;
+				continue;
+			}
+			System.out.print(i + " ");
+			i++;
+		}
+	}
 	
 	public static void main(String[] args) {
 //		sample1();
 //		sample2();
 //		sample3();
 //		sample4();
-		sample5();
+//		sample5();
+		sample6();
 
 		
 	}
