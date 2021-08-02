@@ -252,7 +252,7 @@ public class PracArray {
 					System.out.println("1 ~ 100 사이 입력!!!\n");
 					continue;
 				}
-				
+
 				if(num > ran) {
 					System.out.println("다운\n");
 					max = num;
@@ -280,7 +280,11 @@ public class PracArray {
 		
 		List<String> menu = new ArrayList<String>();
 		menu.add("짜장면");  menu.add("배떡");  menu.add("강준치");  
-		int heart, other = rd.nextInt(3);
+		
+		List<String> addMenu = new ArrayList<String>();
+		
+		
+		int heart = rd.nextInt(3);
 		int count = 0;
 		int ran = rd.nextInt(3);
 		String myMenu = "";
@@ -295,10 +299,15 @@ public class PracArray {
 					System.out.println("오늘의 메뉴는 : " + menu.get(ran) + " 입니다.");
 					System.exit(0);
 				}else if(heart == 2) {
-					ran = (ran % 3) + 1;    count = (count % 3) + 1; 
+					if(ran == 2) {
+						ran = 0;
+					}else {
+						ran = (ran % 3) + 1; 
+					}
+					count = (count % 3) + 1; 
 					
 					if(count >= 3) {
-						System.out.println("우리는 메뉴가 3개뿐입니다..\n");
+						System.out.println("우리는 메뉴가 "+ menu.size() +"개뿐입니다..\n");
 						continue;
 					}
 					
@@ -323,10 +332,9 @@ public class PracArray {
 						System.out.println("오늘의 메뉴는 짜장면 입니다.");
 						System.exit(0);
 					}else {
-						menu.add(myMenu);
-						System.out.println(myMenu +"는 오늘부로 주문해서 내일 드실 수 있습니다.");
-						System.out.println("프로그램을 다시 시작해주세요.");
-						System.exit(0);
+						System.out.println(myMenu +"는 오늘부로 주문해서 내일 드실 수 있습니다.\n");
+						addMenu.add(myMenu);
+						continue;
 					}
 					
 				}
@@ -338,6 +346,78 @@ public class PracArray {
 		
 		
 	}
+	
+	public static void ex11() {
+		// 사용자 입력을 통해 과목 정보를 입력 받는다.
+		// 사용자 입력이 계속 이루어 질 때마다 배열의 크기를 +1씩 늘려 입력한만큼 저장하게 한다.
+		// 사용자 입력이 종료인 경우 더이상 입력을 받지 않고 최종 입력된 모든 과목 정보를 출력.
+		String sub[] = new String[0];
+		String inp = "";
+		
+		while(true) {
+			System.out.print("추가할 과목을 입력 : ");
+			inp = sc.nextLine();
+			
+			if(inp.equals("종료")) {
+				break;
+			}else {
+				String sub2[] = new String[sub.length + 1];
+				for(int i=0; i<sub.length; i++) {
+					sub2[i] = sub[i];
+				}
+				sub = sub2;
+				sub[sub.length - 1] = inp;
+				
+			}
+		}
+		for(int i=0; i<sub.length; i++) {
+			System.out.print("추가한 " + (i+1) + " 번째 과목 : " + sub[i]);
+			System.out.println();
+		}
+		
+	}
+	
+	public static void ex12() {
+		/*
+		 * 1 ~ 49 사이의 정수 값을 사용자 입력을 통해 입력 받고 이를 정수 배열에 저장을 한다.
+		 * -1 이 입력될 때 까지 배열의 크기를 +1씩 증가시키면서 사용자 입력 값을 배열에 저장을 하며
+		 * -1 이 입력되어 더 이상 사용자 입력을 받지 않을 때 배열에 저장된 모든 값의 합을 출력한다.
+		 */
+		int arr[] = new int[0];
+		int num, sum=0;
+		
+		while(true) {
+			System.out.print("1 ~ 49 사이의 정수 입력(종료는 -1 입력 후 엔터) : ");
+			num = sc.nextInt();  sc.nextLine();
+			
+			if(num == -1) {
+				break;
+			}else if(num < 1 || num >49) {
+				System.out.println(" 1 ~ 49 사이 정수 입력!!!!!\n");
+				continue;
+			}else {
+				int copyArr[] = new int[arr.length + 1];
+				for(int i=0; i<arr.length; i++) {
+					copyArr[i] = arr[i];
+				}
+				arr = copyArr;
+				arr[arr.length - 1] = num;
+			}
+		}
+		
+		if(arr.length > 0) {
+			for(int i=0; i<arr.length; i++) {
+				sum += arr[i];
+			}
+			
+			System.out.println("작성한 정수 배열에 모든 원소의 합은 : " + sum);
+		}else {
+			System.out.println("원소 입력을 안했습니다.");
+		}
+	}
+	
+	
+	
 	public static void main(String[] args) {
 		
 				
@@ -352,7 +432,10 @@ public class PracArray {
 //		ex7();
 //		ex8();
 //		ex9();
-		ex10();
+//		ex10();
+//		ex11();
+//		ex12();
+
 	}
 
 }
