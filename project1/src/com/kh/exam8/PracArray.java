@@ -416,7 +416,119 @@ public class PracArray {
 		}
 	}
 	
+	public static void ex13() {
+		/*
+		 * 사용자로부터 임의의 문자열을 입력 받은 후
+		 * a, e, i, o, u 문자가 포함되어 있을 때마다 문자배열에 저장을 한 후
+		 * 배열의 길이를 출력하여 얼마나 포함되어 있는지 확인하게 한다.
+		 */
+		String str[] = new String[0];
+		String inp = "";
+		int count=0;
+		while(true) {
+			System.out.print("문자열 입력(종료는 'z'누르고 엔터) : ");
+			inp = sc.nextLine();
+			
+			if(inp.equals("z")) {
+				break;
+			}else {
+				String copyStr[] = new String[str.length + 1];
+				for(int i=0; i<str.length; i++) {
+					copyStr[i] = str[i];
+				}
+				str = copyStr;
+				str[str.length - 1] = inp;
+			}
+			System.out.println(Arrays.toString(str));
+			
+			
+		}
+		
+		if(str.length>0) {
+			for(int i=0; i<str.length; i++) {
+				for(int j=0; j<str[i].length(); j++) {
+					
+					// a,e,i,o,u 갯수를 모두 찾을때
+//					switch(str[i].charAt(j)) {
+//					
+//						case 'a':
+//							count++;
+//							break;
+//						case 'e':
+//							count++;
+//							break;
+//						case 'i':
+//							count++;
+//							break;
+//						case 'o':
+//							count++;
+//							break;
+//						case 'u':
+//							count++;
+//							break;
+//					}
+					
+					// a,e,i,o,u가 포함된 문자열의 갯수만 찾을 때
+					if(str[i].charAt(j) == 'a' | str[i].charAt(j) == 'e' | str[i].charAt(j) == 'i' | str[i].charAt(j) == 'o' | str[i].charAt(j) == 'u') {
+						count++;
+						break;
+					}
+					
+				}
+			}
+		}
+		System.out.println("a,e,i,o,u 가 포함된 문자열의 갯수는 : " + count +"개");
+	}
 	
+	public static void ex14() {
+		// 국어, 영어, 수학, 과학, 사회 과목정보가 있는 배열이 있다.
+		// 위 배열에서 사용자가 제거하기 원하는 과목을 입력하면 배열에서 제거될 수 있도록 한다.
+		
+		// System.arraycopy() 활용할 수 있으면 활용한다.
+		String sub[] = {"국어", "영어", "수학", "과학", "사회"};
+		String inp = "";
+		
+		while(true) {
+			int count = 0;
+			System.out.println("현재 과목은" +Arrays.toString(sub));
+			System.out.print("제거할 과목은(없으면 0 입력 후 엔터) : ");
+			inp = sc.nextLine();
+			
+			if(inp.equals("0")) {
+				System.out.println("현재 입력된 과목은" +Arrays.toString(sub));
+				break;
+			}
+			
+			
+			for(int i=0; i<sub.length; i++) {
+				if(inp.equals(sub[i])) {
+					String copySub[] = new String[sub.length - 1];
+					System.arraycopy(sub, 0, copySub, 0, copySub.length);
+					
+					for(int j=i; j<sub.length-1; j++) {
+						copySub[j] = sub[j+1];
+					}
+					
+					
+					sub = copySub;
+					
+				}else {
+					count++;
+					if(count >= sub.length) {
+						System.out.println("그런 과목은 없습니다.\n");
+					}
+				}
+				
+			}
+			
+			if(sub.length <=0) {
+				System.out.println("모든 과목을 지우셨습니다.");
+				break;
+			}
+			
+		}
+		
+	}
 	
 	public static void main(String[] args) {
 		
@@ -435,7 +547,8 @@ public class PracArray {
 //		ex10();
 //		ex11();
 //		ex12();
-
+//		ex13();
+		ex14();
 	}
 
 }
