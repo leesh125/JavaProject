@@ -1,4 +1,4 @@
-package com.kh.exam6.shape;
+package com.kh.example.practice3.model.vo;
 
 public class Circle {
 	private double PI=3.14;

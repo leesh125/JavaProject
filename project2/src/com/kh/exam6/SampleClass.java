@@ -1,8 +1,8 @@
 package com.kh.exam6;
 
-import com.kh.exam6.memeber.Member;
-import com.kh.exam6.product.Product;
-import com.kh.exam6.shape.Circle;
+import com.kh.example.practice1.model.vo.Member;
+import com.kh.example.practice2.model.vo.Product;
+import com.kh.example.practice3.model.vo.Circle;
 
 /*
  * 아래의 클래스를 만든 후 동작확인이 되면, 각각의 클래스를 동일 패키지 안에 

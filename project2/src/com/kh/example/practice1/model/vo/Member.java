@@ -1,4 +1,4 @@
-package com.kh.exam6.memeber;
+package com.kh.example.practice1.model.vo;
 
 public class Member{
 	private String memberId;

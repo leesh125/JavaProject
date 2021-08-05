@@ -1,6 +1,6 @@
 package com.kh.exam2;
 
-public class OtherClass {
+public class SamePackage {
 	public int attribute = 100;
-	public OtherClass() {};
+	public SamePackage() {};
 }

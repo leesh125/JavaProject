@@ -1,4 +1,4 @@
-package com.kh.exam6.product;
+package com.kh.example.practice2.model.vo;
 
 public class Product {
 	private String pName = "키보드";
