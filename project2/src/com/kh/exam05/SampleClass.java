@@ -1,4 +1,4 @@
-package com.kh.exam5;
+package com.kh.exam05;
 
 class Other {
 	int x;

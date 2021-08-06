@@ -1,4 +1,4 @@
-package com.kh.exam1;
+package com.kh.exam01;
 
 // 현실세계에 존재하는 사물, 개념을 프로그램에 추상화하여 클래스로 정의한다.
 class Person1 {

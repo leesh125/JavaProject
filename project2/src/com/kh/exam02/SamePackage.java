@@ -1,4 +1,4 @@
-package com.kh.exam2;
+package com.kh.exam02;
 
 public class SamePackage {
 	public int attribute = 100;

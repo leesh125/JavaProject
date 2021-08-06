@@ -1,28 +1,16 @@
-package com.kh.exam9;
+package com.kh.exam09;
 
 public class Prac2 {
 	public boolean isEven(int num) {
-		if(num % 2 == 0) {
-			return true;
-		}else {
-			return false;
-		}
+		return this.isMulti(num, 2);
 	}
 	
 	public boolean isOdd(int num) {
-		if(num % 2 == 1) {
-			return true;
-		}else {
-			return false;
-		}
+		return !this.isMulti(num, 2);
 	}
 	
 	public boolean isMulti(int num) {
-		if(num % 2 == 0) {
-			return true;
-		}else {
-			return false;
-		}
+		return this.isMulti(num, 2);
 	}
 	
 	public boolean isMulti(int num1, int num2) {
@@ -34,11 +22,11 @@ public class Prac2 {
 	}
 	
 	public int max(int num1, int num2) {
-		if(num1 > num2) {
-			return num1;
-		}else
-			return num2;
-		
+//		if(num1 > num2) {
+//			return num1;
+//		}else
+//			return num2;
+		return num1 > num2 ? num1 : num2;
 		
 	}
 	

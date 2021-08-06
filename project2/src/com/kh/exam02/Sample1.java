@@ -1,4 +1,4 @@
-package com.kh.exam2;
+package com.kh.exam02;
 
 // default 접근제한자를 사용하는 다른 패키지의 클래스를 가져오지 못함. 
 // import com.kh.exam2.oth.OtherPackage;

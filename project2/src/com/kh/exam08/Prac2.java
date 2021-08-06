@@ -1,4 +1,4 @@
-package com.kh.exam8;
+package com.kh.exam08;
 
 class MyData2 {
 	public int num;

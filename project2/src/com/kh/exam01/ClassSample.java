@@ -1,4 +1,4 @@
-package com.kh.exam1;
+package com.kh.exam01;
 
 class Kukmin {
 	private String pNo;

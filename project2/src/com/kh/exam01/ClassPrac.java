@@ -1,4 +1,4 @@
-package com.kh.exam1;
+package com.kh.exam01;
 
 // 1. 편의점에서 판매하는 커피 상품에 대한 클래스를 작성
 // 2. 임의의 직업에 대한 클래스를 작성

@@ -1,4 +1,4 @@
-package com.kh.exam6;
+package com.kh.exam06;
 
 //class Member{
 //	private String memberId;

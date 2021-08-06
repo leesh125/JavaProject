@@ -1,4 +1,4 @@
-package com.kh.exam9;
+package com.kh.exam09;
 
 public class Sample1 {
 

@@ -1,3 +1,4 @@
+package com.kh.exam06;
 //package com.kh.exam6;
 //
 //class Circle {

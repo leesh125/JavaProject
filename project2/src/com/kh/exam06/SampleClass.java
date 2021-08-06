@@ -1,4 +1,4 @@
-package com.kh.exam6;
+package com.kh.exam06;
 
 import com.kh.example.practice1.model.vo.Member;
 import com.kh.example.practice2.model.vo.Product;
