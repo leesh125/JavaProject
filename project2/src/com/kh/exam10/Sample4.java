@@ -119,7 +119,6 @@ class Lotto {
 			else if(count < 3) System.out.println("다음 기회에...");
 		}
 		
-		
 	}
 	
 	

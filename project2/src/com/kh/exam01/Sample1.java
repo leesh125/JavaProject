@@ -1,5 +1,7 @@
 package com.kh.exam01;
 
+import java.util.Scanner;
+
 // 현실세계에 존재하는 사물, 개념을 프로그램에 추상화하여 클래스로 정의한다.
 class Person1 {
 	// 사물 또는 개념이 가지고 있는 "속성"을 프로그램의 "멤버 변수/필드" 로 추상화.
@@ -35,16 +37,22 @@ public class Sample1 {
 	public static void main(String[] args) {
 		// 인스턴스화 : 클래스로 정의된 객체를 프로그램으로 동작하기 위해 메모리에 저장
 		// 인스턴스 : 인스턴스화를 거쳐 생성된 객체.
-		Person1 p1 = new Person1();
-		System.out.println(p1.name);
+//		Person1 p1 = new Person1();
+//		System.out.println(p1.name);
+//		
+//		Person2 p2 = new Person2();
+//		// 캡슐화로 인해 직접적인 접근 불가.
+//		// p2.name = "홍길동";
+//		
+//		// 외부에 공개된 메서드를 통해 접근
+//		System.out.println(p2.getName());
+//		
+		Scanner sc = new Scanner(System.in);
 		
-		Person2 p2 = new Person2();
-		// 캡슐화로 인해 직접적인 접근 불가.
-		// p2.name = "홍길동";
+		boolean b;
+		b = sc.nextBoolean();
 		
-		// 외부에 공개된 메서드를 통해 접근
-		System.out.println(p2.getName());
-		
+		System.out.println(b);
 		
 	}
 
