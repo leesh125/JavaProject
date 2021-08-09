@@ -44,6 +44,8 @@ public class Sample1 {
 		
 		// 외부에 공개된 메서드를 통해 접근
 		System.out.println(p2.getName());
+		
+		
 	}
 
 }
