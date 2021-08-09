@@ -1,10 +1,14 @@
 package com.kh.exam10;
 
+import java.util.Arrays;
+
 class Subject {
 	private int jumsu;
 	private String name;
 	private int min=0;
 	private int max=100;
+	private double[] dGrade = {100.0, 90.0, 80.0, 70.0, 60.0, 0.0};
+	private final String[] GRADE = {"A", "B", "C", "D", "F"};
 	
 	public Subject() {
 		
@@ -46,25 +50,43 @@ class Subject {
 	}
 
 	public char getGrade() {
-		if(this.jumsu >= max-(max/10) && this.jumsu <= max) {
+		
+		if(this.jumsu >= 0.9*max && this.jumsu <= max) {
 			return 'A';
-		}else if(this.jumsu >= max-(2*max/10) && this.jumsu <= max-(max/10)) {
+		}else if(this.jumsu >= 0.8*max && this.jumsu <= 0.9*max) {
 			return 'B';
-		}else if(this.jumsu >= max-(3*max/10) && this.jumsu <=max-(2*max/10)) {
+		}else if(this.jumsu >= 0.7*max && this.jumsu <= 0.8*max) {
 			return 'C';
-		}else if(this.jumsu >= max-(4*max/10) && this.jumsu <=max-(3*max/10)) {
+		}else if(this.jumsu >= 0.6*max && this.jumsu <= 0.7*max) {
 			return 'D';
 		}else {
 			return 'F';
 		}
+		
+//		if(this.jumsu == this.dGrade[0]) {
+//			return this.GRADE[0];
+//		} else {
+//			for(int i = 0; i < this.dGrade.length - 1; i++) {
+//				if(this.jumsu < this.dGrade[i] && this.jumsu >= this.dGrade[i+1]) {
+//					return this.GRADE[i];
+//				}
+//			}
+//		}
+//		return this.GRADE[this.GRADE.length - 1];
 	}
 
-	public void setRangeJumsu(int i, int j) {
-		this.min = i;    this.max = j;
+	public void setRangeJumsu(int min, int max) {
+		this.min = min;    this.max = max;
 		double dJumsu;
-		dJumsu = (double)this.jumsu * ((double)j/100);
+		dJumsu = (double)this.jumsu * ((double)max/100);
 		this.jumsu = (int) dJumsu;
 		
+		this.dGrade[0] = max;
+		this.dGrade[this.dGrade.length - 1] = min;
+		for(int i=1; i<this.dGrade.length-1 ; i++) {
+			this.dGrade[i] = max / 100.0 * (100 - i * 10);
+		}
+		System.out.println(Arrays.toString(this.dGrade));
 	}
 
 	public int[] getRangeJumsu() {
@@ -77,59 +99,32 @@ class Subject {
 	}
 
 	public boolean equalSubject(Subject sub2) {
-		if(this.name.equals(sub2.name)) {
-			return true;
-		}else {
-			return false;
-		}
+		return this.name.equals(sub2.name);
 	}
 
 	public boolean gt(Subject sub2) {
-		if(this.jumsu > sub2.jumsu) {
-			return true;
-		}else {
-			return false;
-		}
+		return this.jumsu > sub2.jumsu;
 	}
 	
 	public boolean ge(Subject sub2) {
-		if(this.jumsu >= sub2.jumsu) {
-			return true;
-		}else {
-			return false;
-		}
+		return this.jumsu >= sub2.jumsu;
 	}
 	
 	public boolean lt(Subject sub2) {
-		if(this.jumsu < sub2.jumsu) {
-			return true;
-		}else {
-			return false;
-		}
+		return this.jumsu < sub2.jumsu;
+
 	}
 	
 	public boolean le(Subject sub2) {
-		if(this.jumsu <= sub2.jumsu) {
-			return true;
-		}else {
-			return false;
-		}
+		return this.jumsu <= sub2.jumsu;
 	}
 	
 	public boolean eq(Subject sub2) {
-		if(this.jumsu == sub2.jumsu) {
-			return true;
-		}else {
-			return false;
-		}
+		return this.jumsu == sub2.jumsu;
 	}
 	
 	public boolean nq(Subject sub2) {
-		if(this.jumsu != sub2.jumsu) {
-			return true;
-		}else {
-			return false;
-		}
+		return this.jumsu != sub2.jumsu;
 	}
 	
 }
@@ -176,7 +171,7 @@ public class Sample6 {
 		 * 아래의 메서드를 통해 입력 범위를 제한 할 수 있다.
 		 * 이미 점수가 입력되어 있는 상태에서 범위가 변경되면 기존 점수도 범위에 맞추어 재설정 되어야 한다.
 		 */
-		sub1.setRangeJumsu(0, 10);	// 점수의 입력 범위를 0 ~ 10 으로 한정한다.
+		sub1.setRangeJumsu(0, 20);	// 점수의 입력 범위를 0 ~ 10 으로 한정한다.
 		
 		// 점수의 입력 범위를 확인 할 수 있게 만들어 주는 메서드이다.
 		int[] rg = sub1.getRangeJumsu();

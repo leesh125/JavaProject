@@ -29,12 +29,23 @@ class Employee {
 		this.lastYear = lastYear;
 	}
 	
-	public int getSalary(int salary) {
+	public int getMonth() {
 		int mSalary = this.salary / 12 ;
 		mSalary -= (mSalary * (8/100)); 
 		return mSalary;
 	}
 	
+	public String getName() {
+		return this.name;
+	}
+	
+	public int getSalry() {
+		return this.salary;
+	}
+	
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
 	public void negoSalary() {
 		double nego;
 		System.out.print("전년도 성과가 좋으면 true, 아니면 false 입력 : ");
@@ -49,7 +60,7 @@ class Employee {
 					System.out.println("2.5% 초과해서 올릴 수 없습니다.");
 					continue;
 				}else {
-					this.salary += (double)this.salary * nego; 
+					this.salary += (double)this.salary * (nego/100); 
 					System.out.println("연봉은 : " + this.salary);
 					break;
 				}
@@ -60,11 +71,11 @@ class Employee {
 			nego = sc.nextDouble();  sc.nextLine();
 			
 			if(nego>0.0) {
-				this.salary += (double)this.salary * nego;
+				this.salary += (double)this.salary * (nego/100);
 				System.out.println("연봉은 : " + this.salary);
 			}else {
 				nego *= -1;
-				this.salary -= (double)this.salary * nego;
+				this.salary -= (double)this.salary * (nego/100);
 				System.out.println("연봉은 : " + this.salary);
 			}
 		}
@@ -84,17 +95,20 @@ public class Sample7 {
 		/*
 		 * 직원 정보 관리를 위한 객체를 생성할 때 반드시 사번, 이름, 부서, 직급의 정보가 있어야 한다.
 		 */
-		Employee e1 = new Employee(1692132, "이석현", "풀스택",);
+		Employee e1 = new Employee(1692132, "이석현", "풀스택", "전무");
+		e1.setSalary(6000);
+		System.out.println(e1.getName() + "님의 연봉은 " + e1.getSalry()+ "만원 입니다.");
 		/*
 		 * 급여는 연봉에서 12개월을 나눈 값으로 지급하나 매달 세금으로 급여의 8% 를 빼고 수령받게
 		 * 될것이다. 따라서 급여 정보를 반환하는 메서드는 위의 사항을 고려하여 값이 반환될 수 있게
 		 * 해야 한다.
 		 */
-
+		System.out.println(e1.getName() + "님의 월급은 " + e1.getMonth() + "만원 입니다.");
 		/*
 		 * 회사 내규에 따라 연봉 협상은 현재 연봉의 2.5% 까지만 최대로 올릴 수 있다. 이는 모든 직원들이
 		 * 동일하다. 단, 전년도 실적에 따라 더 높이거나 낮출 수는 있다.
 		 */
+		e1.negoSalary();
 
 	}
 

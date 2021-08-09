@@ -30,13 +30,45 @@ class Lotto {
 	}
 	
 	public void generate(int n1, int n2, int n3) {
-		this.lotto[0] = n1;    this.lotto[1] = n2;    this.lotto[2] = n3;
+//		this.lotto[0] = n1;    this.lotto[1] = n2;    this.lotto[2] = n3;
+//		
+//		
+//		
+//		for(int i=3; i < this.lotto.length; i++){
+//			lotto[i] = rd.nextInt(44) + 1;
+//		}
 		
+		int count=0;
+		this.generate();
 		
-		
-		for(int i=3; i < this.lotto.length; i++){
-			lotto[i] = rd.nextInt(44) + 1;
+		for(int i=3; i<this.lotto.length; i++) {
+			if(this.lotto[i] != n1) {
+				count++;
+			}
+			if(count == 3) {
+				this.lotto[0] = n1;
+				count = 0;
+			}
 		}
+		for(int i=3; i<this.lotto.length; i++) {
+			if(this.lotto[i] != n2) {
+				count++;
+			}
+			if(count == 3) {
+				this.lotto[1] = n2;
+				count = 0;
+			}
+		}
+		for(int i=3; i<this.lotto.length; i++) {
+			if(this.lotto[i] != n3) {
+				count++;
+			}
+			if(count == 3) {
+				this.lotto[2] = n3;
+				count = 0;
+			}
+		}
+		
 		
 	}
 
