@@ -97,13 +97,29 @@ public class Sample1 {
 		sub = new Subject("과학", 90);
 		std.addSubject(sub);
 		
+		System.out.println(std.editSub("영어", "사회"));
+		System.out.println(std.editSub("과학", "체육", 85));
+		System.out.println(std.editSub("국어", 93));
+
+
+		
 		System.out.println(std.getName() + " 학생의 총점은 " + std.total());
+		System.out.println(std.getName() + " 학생의 평균은 " + std.avg());
 		
 		System.out.println(std.getName() + " 학생의 국어 점수는 " + std.getSubjectJumsu("국어"));
 		System.out.println(std.getName() + " 학생의 사회 점수는 " + std.getSubjectJumsu("사회"));
 		
+		std.deleteSubject("사회");
+		std.deleteSubject(2);
+		
+		for(int i=0; std.getSubjectName(i) != null; i++){
+			System.out.println(std.getSubjectName(i) + " 과목의 점수는 "
+							+std.getSubjectJumsu(std.getSubjectName(i)) + " 점 입니다.");
+		}
 		System.out.println(std.getName() + " 학생의 2번째 위치의 과목은 " + std.getSubjectName(1));
 		
+		
+		System.out.println(std.editSub("영어", "사회"));
 	}
 }
 
