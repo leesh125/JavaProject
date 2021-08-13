@@ -1,11 +1,9 @@
 package com.kh.exam12;
 
 class Person {
-	protected String name;
-	protected int age;
-	public String getName() {
-		return name;
-	}
+	private String name;
+	private int age;
+	
 	
 	public Person() {
 		
@@ -16,8 +14,9 @@ class Person {
 		this.age = age;
 	}
 
-
-
+	public String getName() {
+		return name;
+	}
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -44,22 +43,25 @@ class Student extends Person {
 	private int record;
 	
 	
-	public Student(int grade, int group, int stuNum, int record) {
-		
+	public Student(String name, int age, int grade, int group, int stuNum, int record) {
+		super(name,age);
 		this.grade = grade;
 		this.group = group;
 		this.stuNum = stuNum;
 		this.record = record;
 	}
 
-	public Student(String name, int age) {
-		this.setName(name);
-		this.setAge(age);
-	}
+	
 	
 	@Override
 	public String toString() {
-		return  "Student [name=" + name + ", age=" + age + "]";
+		return  "=====학생정보=====\n이름 : " + this.getName() + 
+				" \n나이 : " + this.getAge() + 
+				"세\n학년 : " + grade + 
+				" \n반 : " + group+ 
+				" \n학번 : " + stuNum + 
+				" \n성적 : " + record + 
+				"\n==============";
 	}
 }
 
@@ -71,8 +73,8 @@ class Employee extends Person {
 	
 	
 	public Employee(String name, int age, String company, String rank, String dept) {
-		this.name = name;
-		this.age = age;
+		this.setName(name);
+		this.setAge(age);
 		this.company = company;
 		this.rank = rank;
 		this.dept = dept;
@@ -99,8 +101,8 @@ class Employee extends Person {
 
 	@Override
 	public String toString() {
-		return "=====직원정보=====\n이름 : " + name + 
-				" \n나이 : " + age + 
+		return "=====직원정보=====\n이름 : " + this.getName() + 
+				" \n나이 : " + this.getAge() + 
 				"세\n회사 : " + company + 
 				" \n직급 : " + rank + 
 				" \n부서 : " + dept + 
@@ -120,8 +122,8 @@ class Soldier extends Person {
 	private String species;		// 종과
 	
 	public Soldier(String name, int age, int solNum, String division, String company, String platoon, String species) {
-		this.name = name;
-		this.age = age;
+		this.setName(name);
+		this.setAge(age);
 		this.solNum = solNum;
 		this.division = division;
 		this.company = company;
@@ -150,8 +152,8 @@ class Soldier extends Person {
 
 	@Override
 	public String toString() {
-		return "=====군인정보=====\n이름 : " + name + 
-				" \n나이 : " + age + 
+		return "=====군인정보=====\n이름 : " + this.getName() + 
+				" \n나이 : " + this.getAge() + 
 				"세\n군번 : " + solNum + 
 				" \n사단 : " + division + 
 				" \n중대 : " + company + 
@@ -168,9 +170,10 @@ class Soldier extends Person {
 public class Sample1 {
 
 	public static void main(String[] args) {
-		Student s = new Student("홍길동", 30);
+		Student s = new Student("이석현", 25, 4, 3, 1692132, 95);
 //		s.setName("홍길동");   s.setAge(30);
 		System.out.println(s);
+		System.out.println();
 		
 		Soldier sd = new Soldier("이석현", 25, 73048029 , "3야수교", "4중대", "2소대", "조교");
 		System.out.println(sd);
@@ -178,6 +181,7 @@ public class Sample1 {
 		System.out.println();
 		Employee e = new Employee("카카오", 25, "풀스택 개발","이석현", "전무");
 		System.out.println(e);
+		
 	}
 
 }
