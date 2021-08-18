@@ -114,16 +114,31 @@ public class PointMenu {
 	}
 	
 	public void calcCircleArea() {
-		System.out.print("x 좌표 : ");
-		int x = sc.nextInt(); sc.nextLine();
+		System.out.print("x 좌표, y 좌표, 반지름을 쉼표로 구분하여 입력 : ");
+		String input = sc.nextLine();
+		String inputs[] = input.split(",");
+		int[] intArr = new int[3];
+		for(int i=0; i<inputs.length; i++) {
+			intArr[i] = Integer.parseInt(inputs[i]);
+		}
+		for(int i=0; i<intArr.length; i++) {
+			if(intArr[i] == 0) {
+				intArr[i] = 1;
+			}
+		}
+	
+		System.out.println(cc.calcArea(intArr[0], intArr[1], intArr[2]));
 		
-		System.out.print("y 좌표 : ");
-		int y = sc.nextInt(); sc.nextLine();
-		
-		System.out.print("반지름 : ");
-		int radius = sc.nextInt(); sc.nextLine();
-		
-		System.out.println(cc.calcArea(x, y, radius));
+//		System.out.print("x 좌표 : ");
+//		int x = sc.nextInt(); sc.nextLine();
+//		
+//		System.out.print("y 좌표 : ");
+//		int y = sc.nextInt(); sc.nextLine();
+//		
+//		System.out.print("반지름 : ");
+//		int radius = sc.nextInt(); sc.nextLine();
+//		
+//		System.out.println(cc.calcArea(x, y, radius));
 		this.mainMenu();
 	}
 	
