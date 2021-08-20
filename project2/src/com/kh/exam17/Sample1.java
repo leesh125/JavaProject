@@ -131,6 +131,8 @@ public class Sample1 {
 			String sNum = sc.nextLine();
 			String[] splitNum = sNum.split(" ");
 		
+		// grtufghjdrftynhdftgyunjfuhk
+			//drtybdrtybhudtyhjg
 			try {
 				for(String s: splitNum) {
 					aList.add(Integer.valueOf(s));
