@@ -8,7 +8,7 @@ public class Sample3 {
 
 	public static void ex1() {
 		// 사용자 입력 한 번에 여러 데이터를 입력 받기.
-		
+		System.out.print("정수를 입력하세요(띄어쓰기로 나눔) : ");
 		String input = sc.nextLine();
 		String inputs[] = input.split(" ");
 		int[] intArr = new int[inputs.length];
@@ -71,11 +71,11 @@ public class Sample3 {
 		System.out.println(input);
 	}
 	public static void main(String[] args) {
-		//ex1();
+		ex1();
 		//ex2();
 		//ex3();
 		//ex4();
-		ex5();
+		//ex5();
 
 	}
 
