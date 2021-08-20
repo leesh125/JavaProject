@@ -130,7 +130,8 @@ public class Sample1 {
 			System.out.print("저장시킬 정수를 입력(띄어쓰기로 구분) : ");
 			String sNum = sc.nextLine();
 			String[] splitNum = sNum.split(" ");
-		// grtufghj
+		// grtufghjdrftynhdftgyunjfuhk
+			//drtybdrtybhudtyhjg
 			try {
 				for(String s: splitNum) {
 					aList.add(Integer.valueOf(s));
