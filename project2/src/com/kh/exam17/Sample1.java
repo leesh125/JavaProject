@@ -252,6 +252,8 @@ public class Sample1 {
 		 * 시분초까지만 저장하도록 한다.)
 		 */
 		List<Integer> aList = new ArrayList<Integer>();
+		List<String> dateList = new ArrayList<String>();
+		SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		int count=0 ,overlap = 0;
 		
 		while(count < 10) {
@@ -273,8 +275,9 @@ public class Sample1 {
 				int laterTime = cal2.get(Calendar.SECOND);
 				
 				if(laterTime - firstTime == 3 | laterTime - firstTime == -57) {
-					aList.add(random);
-					System.out.println(aList);
+					String date = dFormat.format(cal.getTime());
+					aList.add(random);		dateList.add(count, date);
+					System.out.println("배열: " + aList + "\n생성된 시간 : " + dateList);	
 					count++;
 					break;
 				}else {
