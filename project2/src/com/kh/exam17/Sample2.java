@@ -4,7 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Random;
 
 class RNumber{
 	private int number;
@@ -49,42 +51,22 @@ class RNumber{
 public class Sample2 {
 
 	public static void main(String[] args) {
-		List<Integer> aList = new ArrayList<Integer>();
-		List<String> dateList = new ArrayList<String>();
-		SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		int count=0 ,overlap = 0;
-		
-		while(count < 10) {
-			int random = (int)(Math.random()*99+1);
-			Calendar cal = Calendar.getInstance();
-			int firstTime = cal.get(Calendar.SECOND);
-			for(int i=0; i<aList.size();i++) {
-				if(random == aList.get(i)) {
-					overlap++;
+		SimpleDateFormat df = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
+		GregorianCalendar gcStart = new GregorianCalendar();
+		GregorianCalendar gcEnd = null;
+		Random rd = new Random();
+		List<RNumber> iList = new ArrayList<RNumber>();
+		while(iList.size() < 10) {
+			gcEnd = new GregorianCalendar();
+			if(((gcStart.get(Calendar.SECOND) + 3) % 60) == gcEnd.get(Calendar.SECOND)) {
+				RNumber temp = new RNumber(rd.nextInt(15) + 1, gcEnd.getTime()); 
+				if(!iList.contains(temp)) {
+					iList.add(temp);
+					System.out.println(iList);
 				}
+				gcStart = gcEnd;
 			}
-			if(overlap >= 1) {
-				overlap = 0;
-				continue;
-			}
-			
-			while(true) {
-				Calendar cal2 = Calendar.getInstance();
-				int laterTime = cal2.get(Calendar.SECOND);
-				
-				if(laterTime - firstTime == 3 | laterTime - firstTime == -57) {
-					String date = dFormat.format(cal.getTime());
-					aList.add(random);		dateList.add(count, date);
-					System.out.println("배열: " + aList + "\n생성된 시간 : " + dateList);	
-					count++;
-					break;
-				}else {
-					continue;
-				}
-			}
-			
 		}
-
 	}
 
 }
