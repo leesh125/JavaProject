@@ -68,6 +68,8 @@ SELECT NVL(COMMISSION_PCT, 0)
 --     3. hire_date 컬럼은 년-월-일 형식으로 조회되도록 한다.
 --     4. commission_pct 에서 널값을 0.0 으로 대체하도록 한다.
 --     5. phone_number에서 전화번호에 사용한 구분자를 . 이 아닌 - 으로 변경하여 조회한다.
+--     6. commission_pct 에 값이 있는 직원에 대해 salary * (1 + commission_pct) 한 결과를
+--        추가급여 항목으로 출력하시오.
 SELECT * FROM EMPLOYEES;
 
 SELECT FIRST_NAME, HIRE_DATE, FLOOR((SYSDATE - HIRE_DATE) / (365 / 12)) AS 근속개월
@@ -98,16 +100,17 @@ SELECT EMAIL
  WHERE EMAIL LIKE '___#_%' ESCAPE '#';
 
 UPDATE EMPLOYEES
-SET PHONE_NUMBER= '980123-1029384'
-WHERE EMPLOYEE_ID = 196;
+SET EMAIL= 'abc_user_1@gma_s.com'
+WHERE EMPLOYEE_ID = 204;
+SELECT *
+FROM EMPLOYEES
+WHERE INSTR(EMAIL, '_', -1, 1) = 4;​
 
 SELECT PHONE_NUMBER
   FROM EMPLOYEES
  WHERE PHONE_NUMBER LIKE '%-1%';
 
-SELECT *
-FROM EMP
-WHERE INSTR(EMAIL, '_', -1, 1) = 4;
+
 
 
 SELECT FIRST_NAME, HIRE_DATE, FLOOR((SYSDATE - HIRE_DATE) / (365 / 12))
@@ -118,7 +121,7 @@ SELECT NVL(COMMISSION_PCT, 0)
   FROM EMPLOYEES;
 
 SELECT FIRST_NAME AS 이름, SALARY AS 월급,
-               COMMISSION_PCT AS 보너스, HIRE_DATE AS 고용일, FLOOR((SYSDATE - HIRE_DATE) /365)
+               COMMISSION_PCT AS 보너스, HIRE_DATE AS 고용일, FLOOR((SYSDATE - HIRE_DATE) /(365/12))
 
   FROM EMPLOYEES
 
