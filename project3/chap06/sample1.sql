@@ -1,0 +1,158 @@
+-- EMPLOYEES 테이블을 바탕으로 새로운 테이블 생성 후 데이터 추가
+-- 추가하는 데이터는 기존 EMPLOYEES 테이블의 데이터를 새로 생성한 테이블 구조에 맞추어 추가
+CREATE TABLE EMP_TEMP (
+      EMP_ID    NUMBER(6)       NOT NULL
+    , NAME      VARCHAR2(20)    NOT NULL
+    , SALARY    NUMBER(8,2)
+    , DEPT_ID   NUMBER(4)
+);
+INSERT INTO EMP_TEMP(
+    SELECT EMPLOYEE_ID
+         , FIRST_NAME || ' ' || LAST_NAME
+         , SALARY
+         , DEPARTMENT_ID
+      FROM EMPLOYEES
+);
+
+-- 여러 테이블의 데이터를 별도의 테이블에 추가.
+CREATE TABLE EMP_TEMP2 (
+      EMP_ID    NUMBER(6)       NOT NULL
+    , NAME      VARCHAR2(20)    NOT NULL
+    , SALARY    NUMBER(8,2)
+    , DEPT_NAME VARCHAR2(30)     NOT NULL
+);
+INSERT INTO EMP_TEMP2(
+    SELECT A.EMPLOYEE_ID
+         , A.FIRST_NAME || ' ' || A.LAST_NAME
+         , A.SALARY
+         , B.DEPARTMENT_NAME
+      FROM EMPLOYEES A JOIN DEPARTMENTS B
+        ON A.DEPARTMENT_ID = B.DEPARTMENT_ID
+);
+
+-- 조회 결과에 맞추어 테이블 생성 및 데이터 추가
+CREATE TABLE EMP_TEMP3 AS
+    SELECT A.EMPLOYEE_ID AS EMP_ID
+         , A.FIRST_NAME || ' ' || A.LAST_NAME AS NAME
+         , A.SALARY AS SALARY
+         , B.DEPARTMENT_NAME AS DEPT_NAME
+      FROM EMPLOYEES A JOIN DEPARTMENTS B
+        ON A.DEPARTMENT_ID = B.DEPARTMENT_ID;
+
+-- 다음 작업을 진행하기 위해 기존에 저장된 데이터 삭제
+DELETE FROM EMP_TEMP1;
+DELETE FROM EMP_TEMP2;
+-- INSERT ALL 을 사용하여 여러 테이블에 하나의 조회 결과를 동시에 추가
+INSERT ALL
+  INTO EMP_TEMP VALUES(EMP_ID, NAME, SALARY, DEPT_ID)
+  INTO EMP_TEMP2 VALUES(EMP_ID, NAME, SALARY, DEPT_NAME)
+SELECT A.EMPLOYEE_ID AS EMP_ID
+     , A.FIRST_NAME || ' ' || A.LAST_NAME AS NAME
+     , A.SALARY AS SALARY
+     , B.DEPARTMENT_ID AS DEPT_ID
+     , B.DEPARTMENT_NAME AS DEPT_NAME
+  FROM EMPLOYEES A JOIN DEPARTMENTS B
+    ON A.DEPARTMENT_ID = B.DEPARTMENT_ID;
+
+
+-- 다음 작업을 진행하기 위해 기존에 저장된 데이터 삭제
+DELETE FROM EMP_TEMP2;
+DELETE FROM EMP_TEMP3;
+-- 여러 테이블에 조회된 데이터를 추가할 때 조건에 따라 추가가 되도록함
+INSERT ALL
+  WHEN SALARY >= 8000 THEN
+      INTO EMP_TEMP2 VALUES(EMP_ID, NAME, SALARY, DEPT_NAME)
+  WHEN SALARY < 8000 THEN
+      INTO EMP_TEMP3 VALUES(EMP_ID, NAME, SALARY, DEPT_NAME)
+SELECT A.EMPLOYEE_ID AS EMP_ID
+     , A.FIRST_NAME || ' ' || A.LAST_NAME AS NAME
+     , A.SALARY AS SALARY
+     , B.DEPARTMENT_NAME AS DEPT_NAME
+  FROM EMPLOYEES A JOIN DEPARTMENTS B
+    ON A.DEPARTMENT_ID = B.DEPARTMENT_ID;
+
+SELECT * FROM EMP_TEMP2;
+SELECT * FROM EMP_TEMP3; 
+DESC DEPARTMENTS;
+
+DESC EMPLOYEES;
+
+-- 년도별로 학생들의 성적데이터를 개별 테이블(년도별로 테이블 필요)에 저장되도록 한다.
+-- 코드가 아닌 식별 가능한 값으로 저장되도록 한다.
+SELECT * FROM TB_GRADE;
+
+
+CREATE TABLE TB_GRADE0 AS
+    SELECT  G.TERM_NO AS 년도,
+            G.CLASS_NO AS 과목코드,
+            S.STUDENT_NAME AS 이름,
+            G.STUDENT_NO AS 학번,
+            G.POINT AS 학점
+      FROM TB_GRADE G JOIN TB_STUDENT S
+        ON G.STUDENT_NO = S.STUDENT_NO;
+
+CREATE TABLE TB_GRADE1 AS
+    SELECT  G.TERM_NO AS 년도,
+            G.CLASS_NO AS 과목코드,
+            S.STUDENT_NAME AS 이름,
+            G.STUDENT_NO AS 학번,
+            G.POINT AS 학점
+      FROM TB_GRADE G JOIN TB_STUDENT S
+        ON G.STUDENT_NO = S.STUDENT_NO;
+
+CREATE TABLE TB_GRADE2 AS
+    SELECT  G.TERM_NO AS 년도,
+            G.CLASS_NO AS 과목코드,
+            S.STUDENT_NAME AS 이름,
+            G.STUDENT_NO AS 학번,
+            G.POINT AS 학점
+      FROM TB_GRADE G JOIN TB_STUDENT S
+        ON G.STUDENT_NO = S.STUDENT_NO;
+
+CREATE TABLE TB_GRADE3 AS
+    SELECT  G.TERM_NO AS 년도,
+            G.CLASS_NO AS 과목코드,
+            S.STUDENT_NAME AS 이름,
+            G.STUDENT_NO AS 학번,
+            G.POINT AS 학점
+      FROM TB_GRADE G JOIN TB_STUDENT S
+        ON G.STUDENT_NO = S.STUDENT_NO;
+
+
+-- 테이블 생성 동시에 데이터도 삽입됨
+CREATE TABLE TB_GRADE5 AS
+    SELECT  G.TERM_NO AS 년도,
+            G.CLASS_NO AS 과목코드,
+            S.STUDENT_NAME AS 이름,
+            G.STUDENT_NO AS 학번,
+            G.POINT AS 학점
+      FROM TB_GRADE G JOIN TB_STUDENT S
+        ON G.STUDENT_NO = S.STUDENT_NO
+     WHERE TERM_NO LIKE '2005%';
+
+DELETE FROM TB_GRADE0;
+DELETE FROM TB_GRADE1;
+DELETE FROM TB_GRADE2;
+DELETE FROM TB_GRADE3;
+DELETE FROM TB_GRADE4;
+
+INSERT ALL
+  WHEN 년도 LIKE '2000%' THEN
+      INTO TB_GRADE0 VALUES(년도, 과목코드, 이름, 학번, 학점)
+  WHEN 년도 LIKE '2001%' THEN
+      INTO TB_GRADE1 VALUES(년도, 과목코드, 이름, 학번, 학점)
+  WHEN 년도 LIKE '2002%' THEN
+      INTO TB_GRADE3 VALUES(년도, 과목코드, 이름, 학번, 학점)
+  WHEN 년도 LIKE '2003%' THEN
+      INTO TB_GRADE3 VALUES(년도, 과목코드, 이름, 학번, 학점)
+  WHEN 년도 LIKE '2004%' THEN
+      INTO TB_GRADE4 VALUES(년도, 과목코드, 이름, 학번, 학점)
+SELECT G.TERM_NO AS 년도,
+       G.CLASS_NO AS 과목코드,
+       S.STUDENT_NAME AS 이름,
+       G.STUDENT_NO AS 학번,
+       G.POINT AS 학점
+  FROM TB_GRADE G JOIN TB_STUDENT S
+    ON G.STUDENT_NO = S.STUDENT_NO;
+
+SELECT * FROM TB_GRADE0;
