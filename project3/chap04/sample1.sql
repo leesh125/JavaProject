@@ -2,9 +2,27 @@
 -- 오름차순(ASC), 내림차순(DESC) 정렬으 할 수 있으며, 기본은 오름차순이다.
 -- SELECT 절, FROM 절, WHERE 절 들보다 가장 마지막에 실행된다.
 
-SELECT * 
-  FROM TB_STUDENT
- ORDER BY DEPARTMENT_NO;
+SELECT S.STUDENT_NO AS 학번,
+       S.STUDENT_NAME AS 이름,
+       CONCAT(SUBSTR(S.STUDENT_SSN, 1,8), '******') AS 주민번호,
+       D.DEPARTMENT_NAME AS 학과명,
+       DECODE(S.ABSENCE_YN, 'Y', '재학중', 'N', '휴학중', '기타') AS 휴학유무 
+  FROM TB_STUDENT S JOIN TB_DEPARTMENT D
+    ON S.DEPARTMENT_NO = D.DEPARTMENT_NO;
+
+SELECT S.STUDENT_NO AS 학번,
+       S.STUDENT_NAME AS 이름,
+       CONCAT(SUBSTR(S.STUDENT_SSN, 1,8), '******') AS 주민번호,
+       D.DEPARTMENT_NAME AS 학과명,
+       CASE S.ABSENCE_YN WHEN 'Y' THEN '재학중' 
+                         WHEN 'N' THEN '휴학중' 
+                         ELSE '기타'
+        END AS 휴학유무    
+  FROM TB_STUDENT S JOIN TB_DEPARTMENT D
+    ON S.DEPARTMENT_NO = D.DEPARTMENT_NO;
+
+SELECT *
+  FROM TB_DEPARTMENT; 
 
 SELECT * 
   FROM TB_STUDENT

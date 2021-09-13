@@ -37,8 +37,16 @@ SELECT SYSDATE, TO_CHAR(SYSDATE, 'yyyy-mm-dd'),
        TO_CHAR(SYSTIMESTAMP, 'yyyy-mm-dd hh:mi:ss')
   FROM DUAL;
 
+SELECT TO_DATE('20/10/13', 'yyyy-mm-dd')
+  FROM DUAL;
+
 SELECT TO_DATE('210505', 'yy-mm-dd'),
        TO_TIMESTAMP('2021-09-01', 'yyyy-mm-dd')
+  FROM DUAL;
+
+SELECT EXTRACT(YEAR FROM TO_DATE('20/10/13', 'yy-mm-dd')) || '-' ||
+       EXTRACT(MONTH FROM TO_DATE('20/10/13', 'yy-mm-dd')) || '-' ||
+       EXTRACT(DAY FROM TO_DATE('20/10/13', 'yy-mm-dd'))
   FROM DUAL;
 
 SELECT EXTRACT(YEAR FROM TO_DATE('210505', 'yy-mm-dd')) || '년 ' ||
