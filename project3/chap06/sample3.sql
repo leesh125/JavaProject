@@ -1,7 +1,7 @@
 -- 테이블을 직접 생성
 CREATE TABLE STD_AVG_POINT(
       년도 VARCHAR2(4) NOT NULL,
-      학번 VARCHAR2(10) NOU NULL,
+      학번 VARCHAR2(10) NOT NULL,
       이름 VARCHAR2(50) NOT NULL,
       평균 NUMBER(3,2)
 );
