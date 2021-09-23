@@ -207,6 +207,8 @@ SELECT * FROM V_DEPT_INFO;
 -- TB_PROFESSOR, TB_STUDENT 의 이름, 주민번호, 주소 를 출력하는 PL/SQL 작성
 -- 주민번호의 경우 마지막 7자리에 대해 ******* 로 처리될 수 있도록 한다.
 -- 사용자 입력으로 숨김이라는 입력을 받으면 ******* 로 처리되게 한다.
+
+-- #1
 CREATE VIEW TB_PRO_STU_INFO AS
     SELECT P.PROFESSOR_NAME AS 교수이름,
            P.PROFESSOR_SSN AS 교수주민번호,
@@ -247,7 +249,7 @@ BEGIN
         END LOOP;
     END IF;
 
-    
+
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
         DBMS_OUTPUT.PUT_LINE('해당 데이터가 존재하지 않습니다.');
@@ -256,6 +258,70 @@ EXCEPTION
 END;
 /
 
+-- #2
+CREATE VIEW TB_PRO_STU_INFO AS
+    SELECT P.PROFESSOR_NAME AS 교수이름,
+           P.PROFESSOR_SSN AS 교수주민번호,
+           P.PROFESSOR_ADDRESS AS 교수주소,
+           S.STUDENT_NAME AS 학생이름,
+           S.STUDENT_SSN AS 학생주민번호,
+           S.STUDENT_ADDRESS AS 학생주소
+     FROM TB_PROFESSOR P, TB_STUDENT S
+    WHERE P.PROFESSOR_NO = S.COACH_PROFESSOR_NO
+      AND S.DEPARTMENT_NO IN ('050');
+
+
+CREATE VIEW TB_PRO_STU_INFO_HIDE AS
+    SELECT P.PROFESSOR_NAME AS 교수이름,
+           CONCAT(SUBSTR(P.PROFESSOR_SSN, 1, 8), '*******') AS 교수주민번호,
+           P.PROFESSOR_ADDRESS AS 교수주소,
+           S.STUDENT_NAME AS 학생이름,
+           CONCAT(SUBSTR(S.STUDENT_SSN, 1, 8), '*******') AS 학생주민번호,
+           S.STUDENT_ADDRESS AS 학생주소
+      FROM TB_PROFESSOR P, TB_STUDENT S
+     WHERE P.PROFESSOR_NO = S.COACH_PROFESSOR_NO
+       AND S.DEPARTMENT_NO IN ('050');
+
+
+CREATE VIEW V_STD_PROF_INFO AS
+    SELECT STUDENT_NAME AS NAME
+        , STUDENT_SSN AS SSN
+        , STUDENT_ADDRESS AS ADDR
+    FROM TB_STUDENT
+    UNION ALL
+    SELECT PROFESSOR_NAME AS NAME
+        , PROFESSOR_SSN AS SSN
+        , PROFESSOR_ADDRESS AS ADDR
+    FROM TB_PROFESSOR;
+
+SELECT * FROM V_STD_PROF_INFO;
+
+DECLARE
+    HIDDEN_YN   CHAR(1);
+    INPUT       VARCHAR2(10);
+    INPUT_VAL   VARCHAR2(10);
+BEGIN
+    INPUT := '&INPUT';
+    IF INPUT_VAL = '숨김' THEN
+        HIDDEN_YN := 'Y';
+    ELSE
+        HIDDEN_YN := 'N';
+    END IF;
+
+    FOR R IN (SELECT * FROM V_STD_PROF_INFO WHERE ROWNUM <= 10) LOOP
+        DBMS_OUTPUT.PUT(R.NAME || ' | ');
+
+        IF HIDDEN_YN = 'Y' THEN
+            DBMS_OUTPUT.PUT(SUBSTR(R.SSN, 1, 8) || '******' || ' | ');
+        ELSE
+            DBMS_OUTPUT.PUT(R.SSN);
+        END IF;
+
+        DBMS_OUTPUT.PUT(R.ADDR);
+        DBMS_OUTPUT.PUT_LINE('');
+    END LOOP;
+END;
+/
 
 SELECT * FROM TB_PRO_STU_INFO;
 
