@@ -310,4 +310,55 @@ FOR rec2 IN (SELECT 제품코드, 제품명, 입고량, 출고량 FROM V_PROD_OU
             B. 기존에 존재하는 제품코드, 제품명이나 단가가 입력된 단가와 다른 경우 입력된 단가로 수정한다.
             C. 기존에 존재하지 않는 제품코드인 경우 새로운 제품으로 추가한다.
             D. 기존에 존재하는 제품코드이나 제품명이 다른 경우 어떠한 작업도 수행하지 않는다.
+
+            
 */ 
+SET SERVEROUTPUT ON;
+CREATE OR REPLACE PROCEDURE PROC_PROD_IN(i_code IN CHAR, i_name IN CHAR , i_price IN NUMBER, i_cnt IN NUMBER)
+IS
+    name_err     EXCEPTION;
+    check_other   NUMBER:=0;
+BEGIN    
+
+    FOR rec IN (SELECT * FROM PRODUCTS) LOOP
+        IF rec.PID = i_code THEN
+            IF rec.PNAME = i_name THEN
+                UPDATE PRODUCTS SET AMOUNT = i_price WHERE PID=i_code AND PNAME=i_name;
+                UPDATE PRODUCTS SET CNT = (CNT + i_cnt) WHERE PID=i_code AND PNAME=i_name;
+                DBMS_OUTPUT.PUT_LINE('제품 내역이 수정되었습니다.');
+                check_other := 1;    
+                INSERT INTO PROD_INOUT VALUES(PROD_INOUT_SEQ.NEXTVAL, 'I', i_code, i_price, i_cnt, i_price*i_cnt, SYSDATE);
+            ELSE
+                RAISE name_err;            
+            END IF;
+            
+             
+        END IF;            
+    END LOOP;
+    IF check_other != 1 THEN
+        INSERT INTO PRODUCTS VALUES(i_code, i_name, i_price, i_cnt);
+        INSERT INTO PROD_INOUT VALUES(PROD_INOUT_SEQ.NEXTVAL, 'I', i_code, i_price, i_cnt, i_price*i_cnt, SYSDATE);
+    END IF;    
+EXCEPTION 
+    WHEN name_err THEN
+        DBMS_OUTPUT.PUT_LINE('올바른 제품명를 입력하세요');    
+END;
+/
+
+
+EXEC PROC_PROD_IN('A00001', '투명박스', 1000, 12);
+SELECT * FROM PRODUCTS ORDER BY PID;
+SELECT * FROM PROD_INOUT WHERE PID='A00001';
+SHOW ERROR;
+
+
+-- 금액 합계 함수도 만들어보기
+UPDATE PROD_INOUT
+   SET PRICE = (CASE WHEN IN_OUT = 'I' THEN
+                        (AMOUNT * CNT) - FLOOR((AMOUNT * CNT) * 0.1)
+                     WHEN IN_OUT = 'O' THEN
+                        (AMOUNT * CNT) + FLOOR((AMOUNT * CNT) * 0.1)
+                 END);
+
+INSERT INTO PROD_INOUT VALUES(PROD_INOUT_SEQ.NEXTVAL, 'I', i_code, i_price, i_cnt, i_price*i_cnt, SYSDATE);
+INSERT INTO PROD_INOUT VALUES(PROD_INOUT_SEQ.NEXTVAL, 'I', 'A00001', 15000, 7, 94500, TO_DATE('20210125', 'yyyymmdd'));

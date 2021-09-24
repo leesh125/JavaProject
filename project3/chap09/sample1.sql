@@ -17,7 +17,7 @@
 */
 CREATE SEQUENCE ACC_SEQ;
 DESC ACCOUNTS;
-CREATE TABLE ACCOUNTS(
+CREATE TABLE ACCOUNTS2(
     ID NUMBER PRIMARY KEY,
     AMOUNT NUMBER NOT NULL DEFAULT 0,
     ACC_TYPE CHAR(1) CHECK(ACC_TYPE IN ('I','O')),
@@ -224,7 +224,7 @@ BEGIN
             DBMS_OUTPUT.PUT_LINE(rec.항목 || ' | ' || rec.내역);
         END LOOP;
     ELSE
-        RAISE type_err;
+        RAISE type_r;er
     END IF;
 EXCEPTION
     WHEN type_err THEN
