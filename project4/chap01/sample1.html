@@ -7,13 +7,27 @@
         <-->
         <title>문서 제목</title>
         <!--        MIME Type-->
-        <link type="image/gif" rel="icon" href="/myrepo/project4/static/icon/default.png"> 
-        <link type="text/css" rel="stylesheet" href="myrepo/project4/static/css/basic.css">
+        <link type="image/gif" rel="icon" href="/static/icon/default.png"> 
+        <link type="text/css" rel="stylesheet" href="/static/css/basic.css">
+        <base href="/other/" target="_blank">
+        <script type="text/javascript" src="/static/js/basic.js"></script>
+        <style> body {background-color: gainsboro;} </style>
     </head>
     <body>
+<!--<body onload="test()"> : js 실행을 위한 body 태그-->
         <!-- URL   Server IP|Port|Path|Filename
             http://127.0.0.1:5500/myrepo/project4/chap01/sample1.html
+
+            현재 디렉터리 : 요청한 페이지가 존재하는 디렉터리
+            
+            /  : ROOT 디렉터리
+            ./ : 현재 디럭터리 위치임을 명시 -> 생략 가능
+            ../ : 현재 디렉터리의 상위 디렉터리임을 명시
         -->
-        문서 내용 작성
+        <ul>
+            <li><a href="test.html">페이지 링크</a></li>
+            <li><a href="/chap01/sample2.html">샘플2 페이지</a></li>
+            <li><a href="/chap01/sample3.html">샘플3 페이지</a></li>
+        </ul>
     </body>
 </html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>목록/표 태그</title>
+    <style> 
+        table {
+            border-collapse: collapse;
+        }
+        td,th{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>목록 태그</h1>
+    <ol type="i" start="5">
+        <li>순서 번호가 있는 목록 A</li>
+        <li>순서 번호가 있는 목록 B</li>
+        <li>순서 번호가 있는 목록 C</li>
+        <li>순서 번호가 있는 목록 D</li>
+    </ol>
+
+    <ul type="square">
+        <li>순서 번호가 없는 목록 A</li>
+        <li>순서 번호가 없는 목록 B</li>
+        <li>순서 번호가 없는 목록 C</li>
+        <li>순서 번호가 없는 목록 D</li>
+    </ul>
+
+    <ol>
+        <li>상위 목록 1</li>
+        <li>상위 목록 2
+            <ol>
+                <li>하위 목록 1</li>
+                <li>하위 목록 2</li>
+            </ol>
+        </li>
+    </ol>
+
+    <ul>
+        <li>상위 목록 1</li>
+        <li>상위 목록 2
+            <ul>
+                <li>하위 목록 1</li>
+                <li>하위 목록 2</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h1>테이블 태그</h1>
+    <table>
+        <tr>
+            <th>1행 1열</th>
+            <td>1행 2열</td>
+            <td>1행 3열</td>
+        </tr>
+        <tr>
+            <td>2행 1열</td>
+            <td>2행 2열</td>
+            <td>2행 3열</td>
+        </tr>
+    </table>
+
+    <h1>시멘틱을 적용한 테이블</h1>
+    <table>
+        <caption>테이블 제목/설명</caption>
+        <thead>
+            <tr>
+                <th>제목열 1</th>
+                <th>제목열 2</th>
+                <th>제목열 3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>값 1</td>
+                <td>값 2</td>
+                <td>값 3</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>값 4</td>
+                <td>값 5</td>
+                <td>값 6</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <h1>테이블의 열/행 병합</h1>
+    <table>
+        <tr>
+            <td colspan="2">1행 1,2열</td>
+            <!-- td>1행 2열</td -->
+            <td>1행 3열</td>
+            <td colspan="2">1행 4,5열</td>
+            <!-- td>1행 5열</td -->
+        </tr>
+        <tr>
+            <td colspan="3">2행 1, 2, 3열</td>
+            <!-- td>2행 2열</td -->
+            <!-- td>2행 3열</td -->
+            <td>2행 4열</td>
+            <td>2행 5열</td>
+        </tr>
+        <tr>
+            <td rowspan="2">3, 4행 1열</td>
+            <td rowspan="3">3, 4, 5행 2열</td>
+            <td>3행 3열</td>
+            <td>3행 4열</td>
+            <td>3행 5열</td>
+        </tr>
+        <tr>
+            <!-- td>4행 1열</td -->
+            <!-- td>4행 2열</td -->
+            <td>4행 3열</td>
+            <td>4행 4열</td>
+            <td>4행 5열</td>
+        </tr>
+        <tr>
+            <td>5행 1열</td >
+            <!-- td>5행 2열</td -->
+            <td>5행 3열</td>
+            <td>5행 4열</td>
+            <td>5행 5열</td>
+        </tr>
+    </table>
+    <h1>열 묶음 태그</h1>
+    <table>
+        <colgroup>
+            <col style="background-color: magenta;">
+            <col style="background-color: coral;">
+            <col style="background-color: mediumaquamarine;">
+            <col style="background-color: teal;">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>컬럼 1</th>
+                <th>컬럼 2</th>
+                <th>컬럼 3</th>
+                <th>컬럼 4</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>값 1</td>
+                <td>값 2</td>
+                <td>값 3</td>
+                <td>값 4</td>
+            </tr>
+            <tr>
+                <td>값 1</td>
+                <td>값 2</td>
+                <td>값 3</td>
+                <td>값 4</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <form>
+        
+        <table style="width: 700px; border: 2px solid black;">
+            <caption>
+                <span style="font-family: Arial, Helvetica, sans-serif;">2020년 00월</span><br>
+                <span style="font-size: x-large; font-weight: 700;">급여명세서</span>
+            </caption>
+
+            <td style="width: 9%; text-align: right; padding-right: 3px;">성명:</td>
+            <td style="width: 16%;"></td>
+            <td style="width: 9%; text-align: right; padding-right: 3px;">부서:</td>
+            <td style="width: 16%;"></td>
+            <td style="width: 9%; text-align: right; padding-right: 3px;">직책:</td>
+            <td style="width: 16%;"></td>
+            <td style="width: 9%; text-align: right; padding-right: 3px;">지급일:</td>
+            <td style="width: 16%;"></td>
+        </table>
+        <table style="width: 700px; border: 1px solid red;">
+            <thead style="background-color: lightgray;">
+                <tr>
+                    <th style="width: 25%;">지급항목</th>
+                    <th style="width: 25%;">지급액</th>
+                    <th style="width: 25%;">공제항목</th>
+                    <th style="width: 25%;">공제액</th>
+                </tr>
+            </thead>
+            <tbody style="text-align: center; ">
+                <tr style="width: 100%;">
+                    <td>기본급</td>
+                    <td></td>
+                    <td>소득세</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>직책수당</td>
+                    <td></td>
+                    <td>주민세</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>연장수당</td>
+                    <td></td>
+                    <td>고용보험</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>휴일수당</td>
+                    <td></td>
+                    <td>국민연금</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>상여금</td>
+                    <td></td>
+                    <td>장기요양</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>기타</td>
+                    <td></td>
+                    <td>건강보험</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>식대</td>
+                    <td></td>
+                    <td>연말정산</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>교통비</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>복지후생</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>기타</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="tbold" style="background-color: lightgray;">공제합계</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="tbold" style="background-color: lightgray;">급여계</td>
+                    <td></td>
+                    <td class="tbold" style="background-color: lightgray;">차감수령액</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+            
+        </table>
+        <table style="width: 700px; height: 60px; border-bottom: 3px solid black;">
+            <tr>
+                <td rowspan="2" style="width: 53%; padding-left: 15px; border-right: none;">귀하의 노고에 감사드립니다.</td>
+                <td rowspan="2" style="padding-left: 20px; border-left: 0.1rem solid lightgray;"> ㈜ 회사</td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+

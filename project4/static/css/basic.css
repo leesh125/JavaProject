@@ -1,7 +1,16 @@
 body {
-    background-color: black;
+    background-color: gainsboro;
     font-size: large;
     color: chartreuse;
 }
 
+a {
+    text-decoration: none;
+}
 
+a:hover {
+    
+    text-shadow: magenta;
+    transition: 3s;
+    
+}
