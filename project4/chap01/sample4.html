@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>영역 관련 태그</title>
+    <style>
+        header{
+            background-color: aquamarine;
+            height: 100px;
+        }
+        nav{
+            background-color: bisque;
+            height: 50%;
+            text-align: center;
+        }
+        section{
+            float: left;
+            width: 70%;
+            box-sizing: border-box;
+            
+            background-color: chartreuse;
+            padding: 10px;
+        }
+        aside{
+            float: left;
+            width: 30%;
+            box-sizing: border-box;
+            height: 100px;
+            background-color: coral;
+        }
+        footer{
+            height: 50px;
+            clear: both;
+            background-color: cornflowerblue;
+        }
+        article{
+            height: 50px;
+            background-color: crimson;
+        }
+        body{
+            max-width: 1280px;
+        }
+        a{
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header id="top">
+        <nav>메뉴가 만들어질 영역</nav>
+    </header>
+
+    <section>
+        <article>본문 콘텐츠가 생성될 영역 2</article>
+        <article>본문 콘텐츠가 생성될 영역 1</article>
+    </section>
+
+    <aside>광고 및 외부 링크 목록</aside>
+
+    <footer>
+        회사 소개 및 사이트 맵, 저작권 정보
+    </footer>
+    <a href="#top">페이지 상단으로 이동</a>
+</body>
+</html>
