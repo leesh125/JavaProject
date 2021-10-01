@@ -1,0 +1,101 @@
+* {
+    /* 모든 요소가 공통된 스타일 속성이 필요한 경우 사용(초기화) */
+    /* 모든 요소들에게 공통된 스타일 적용하요 초기화 시킴 */
+    margin: 0;      /* 외부 여백 */
+    padding: 0;     /* 내부 여백 */
+}
+
+h1, h2,h3 ,h4 ,h5 ,h6 {
+    margin: 10px;
+}
+
+h2{
+    text-decoration: underline;
+}
+
+#first {
+    background-color: beige;
+}
+
+#second {
+    background-color: burlywood;
+}
+
+.cls-1 {
+    color: crimson;
+}
+
+.cls-2 {
+    color: deepskyblue;
+}
+
+.cls-3 {
+    background-color: lightcyan;
+}
+
+input[type="number"] {
+    background-color: azure;
+}
+
+input[placeholder] {
+background-color: #ececec;
+}
+
+[subject] {
+    margin: 16px;
+}
+
+/* ~= : 해당 단어를 포함할 경우 */ 
+[subject~=title] {
+    font-size: 18px;
+}
+
+/* ^= : 해당 문자열로 시작될 경우 */
+[subject^=text] {
+    color: crimson;
+}
+
+/* $= : 해당 문자열로 끝날 경우 */
+[subject$=context] {
+    text-decoration: underline;
+}
+
+/* *= : 해당 문자열을 포함할 경우 */
+[subject*=body] {
+    background-color: limegreen;
+}
+
+/* |= : 해당 문자열로 시작하면서 '-'이 뒤에올 경우*/
+[subject|=bold] {
+    font-weight: bold;
+}
+
+[subject|=italic] {
+    font-style: italic;
+}
+
+ul {
+margin-left: 36px;
+}
+
+ul > li {
+    padding: 4px 8px;
+}
+
+ul>li>ol{
+    margin-left: 36px;
+}
+
+ul li {
+    color: firebrick;
+}
+
+/* 동위 선택 a+b == a 바로 뒤에 있는 b만 */
+h2+p {
+    background-color: cornflowerblue;
+}
+
+/* 동위 선택 a~b == a 뒤에 있는 b들 전부 */
+h2~p {
+    color: darkorange;
+}

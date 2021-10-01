@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS 예제 2</title>
+    <link rel="stylesheet" href="/static/css/ch2_2.css">
+</head>
+<body>
+    <h2>Pseudo Selector 1</h2>
+    <form>
+        <div>
+            <input class="text-input" type="text">
+        </div>
+        <div>
+            <input class="password-input" type="password">
+        </div>
+        <div>
+            <input class="password-input" type="password" disabled>
+        </div>
+        <div>
+            <a href="/join">회원가입</a> | <a href="/chap02/sample1.html">아이디/패스워드 찾기</a>
+        </div>
+        <div>
+            <input class="remember" type="checkbox"><label for="remember">기억하기</label>
+        </div>
+    </form>
+    <h2>Pseudo Selector 2</h2>
+    <table>
+        <tr>
+            <td>컬럼 1</td><td>컬럼 2</td>
+            <td>컬럼 3</td><td>컬럼 4</td>
+            <td>컬럼 5</td><td>컬럼 6</td>
+        </tr>
+        <tr>
+            <td>값 1</td><td>값 2</td>
+            <td>값 3</td><td>값 4</td>
+            <td>값 5</td><td>값 6</td>
+        </tr>
+        <tr>
+            <td>값 1</td><td>값 2</td>
+            <td>값 3</td><td>값 4</td>
+            <td>값 5</td><td>값 6</td>
+        </tr>
+        <tr>
+            <td>값 1</td><td>값 2</td>
+            <td>값 3</td><td>값 4</td>
+            <td>값 5</td><td>값 6</td>
+        </tr>
+    </table>
+
+    <h2>Pseudo Selector 3</h2>
+    <p class="f-letter">
+        첫번째 글자의 색을 변경합니다.
+    </p>
+    <p class="f-line">
+        첫번째 줄의 스타일을 변경합니다. 
+        첫번째 줄은 브라우저 화면 크기에 따라 
+        변경이 됩니다. 따라서 브라우저의 크기를 
+        늘이거나 줄여서 확인하세요.
+    </p>
+
+    <span id="id-color" class="cls-color" 
+    style="color: orange;">스타일이 중복되어 있을 때
+    </span>
+    
+</body>
+</html>

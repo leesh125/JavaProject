@@ -1,0 +1,113 @@
+[class*=input]:active {
+    background-color: chocolate;
+}
+
+[class*=input]:hover {
+    background-color: yellow;
+}
+
+[type=checkbox]:checked {
+    box-shadow: 0 0 0 2px red;
+}
+
+:checked+label {
+    color: red;
+}
+
+input:focus {
+    background-color: lightgreen;
+}
+
+input:enabled {
+    background-color: aliceblue;
+}
+
+input:disabled {
+    background-color: black;
+}
+
+form a {
+    text-decoration: none;
+}
+
+form a:hover{
+    transition-duration: 1.5s;
+    color: deeppink;
+}
+
+:link {
+    color: cornflowerblue;
+}
+
+:visited {
+    color: crimson;
+}
+
+tr:first-child {
+    font-weight: bold;
+}
+
+td:nth-child(3n) {
+    background-color: azure !important;
+}
+
+td:nth-child(3n-1) {
+    background-color: aquamarine;
+}
+
+td:nth-child(3n-2) {
+    background-color: aqua;
+}
+
+td:nth-child(3n) {
+    background-color: dodgerblue;
+}
+
+tr:last-child {
+    background-color: cornsilk;
+}
+
+h2:first-of-type {
+    background-color: lightcyan;    
+}
+
+h2:nth-of-type(2n-1) {
+    color: dimgray;
+}
+
+h2:last-of-type {
+    background-color: lightgreen;    
+}
+
+.f-letter::first-letter {
+    color: red;
+    font-size: 2em;
+}
+
+.f-line::first-line {
+    color: crimson;
+}
+
+::selection {
+    background-color:  lightcyan;
+}
+
+h2::before {
+    content: "◐ "
+}
+
+h2::after {
+    content: " ◑"
+}
+
+#id-color {
+    color: blue;
+}
+
+.cls-color {
+    color: green;
+}
+
+span {
+    color: red !important;
+}
