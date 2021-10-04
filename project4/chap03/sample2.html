@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .z-idx-style{
+            position: relative;
+        }
+        .z-idx-style > div {
+            position: absolute;
+            background-color: red;
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+        }
+        .z-idx-style > .lv1-1 {
+            left: 0px;
+            top: 50px;
+            z-index: 1;
+        }
+        .z-idx-style > .lv1-2 {
+            left: 25px;
+            top: 75px;
+            z-index: 2;
+        }
+        .z-idx-style > .lv1-3 {
+            left: 50px;
+            top: 100px;
+            z-index: 3;
+        }
+        .float-style {
+            position: absolute;
+            top: 220px;
+        }
+        .float-style > div {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+        }
+        .bg-1 {
+            background-color: coral;
+        }
+        .bg-2 {
+            background-color: cornflowerblue;
+        }
+        .bg-3 {
+            background-color: red;
+        }
+        .float-style .left {
+            float: left;
+        }
+        .float-style .right {
+            float: right;
+        }
+        .float-style .clear {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <article class="z-idx-style">
+            <h2>z-index</h2>
+            <div class="lv1-1" style="background-color: red;"></div>
+            <div class="lv1-2" style="background-color: blue;"></div>
+            <div class="lv1-3" style="background-color: green;"></div>
+        </article>
+
+        <article class="float-style">
+            <h2>float</h2>
+            <div class="bg-1"></div>
+            <div class="bg-2 right"></div>
+            <div class="bg-3 clear"></div>
+        </article>
+    </section>
+</body>
+</html>

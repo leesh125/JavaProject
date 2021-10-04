@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>글자 관련 스타일</title>
+    <style>
+        @font-face {
+            font-family: 'myfont';
+            src: url('/static/font/D2coding.ttf') format('truetype');
+        }
+        .font1 {
+            font-family: 'myfont', '궁서체', '돋움체', '맑은 고딕';
+        }
+        .font2 {
+            /* font-family: 'Courier New', Courier, monospace; */
+            /* font-size: 24px; */
+            /* font-weight: 700; */
+            font: 700 24px 'Courier New', Courier, monospace;
+            color: #f77474;
+            text-shadow: 10px 10px 5px black, 5px 5px 5px blue;
+        }
+        .para-style {
+            text-align: left;
+            text-indent: 4em;
+            line-height: 2em;
+        }
+        .para-style > p {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .lst-style > ol {
+            list-style-type: lower-alpha;
+            list-style-position: outside;
+            background-color:antiquewhite;
+        }
+        .lst-style > ul {
+            list-style-type: square;
+            list-style-position: inside;
+            background-color:antiquewhite;
+            border: 10px dotted
+        }
+        .content-style {
+            background-color: cornflowerblue;
+        }
+        .content-style > div {
+            background-color: antiquewhite;
+            display: inline-block;
+            width: 80px;   height: 50px;
+            border: 5px solid red;
+            padding: 5px;
+            margin: 5px;
+            box-sizing: border-box;
+        }
+        .round-border > div {
+            display: inline-block;
+            border: 1px solid red;
+            padding: 4px;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 4px 4px 5px red;
+        }
+
+        .position-main div {
+            border: 1px solid black;
+            display: inline-block;
+        }
+        .position-main > div {
+            height: 100px; width: 500px;
+        }
+        .p-relative {
+            position: relative;
+        }
+        .p-relative-child {
+            position: absolute;
+            bottom: 10px;
+        }
+        .p-absolute {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+        .p-absolute-child {
+            position: absolute;
+            right: 10px; bottom: 10px;
+        }
+        .p-fixed {
+            position: fixed;
+            left: 150px;
+            bottom: 50px;
+        }
+        .p-fixed-child {
+            position: absolute;
+            right: 10px; bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h1>글자 관련 스타일</h1>
+        <article class="font1">
+            <h2>font-family</h2>
+            <p>사용자 화면에 표시 할 글꼴 선택,
+                사용자 디바이스에 지정된 글꼴이 없는 경우 브라우저 기본 글꼴로 표시
+            </p>
+        </article>
+        <article class="font2">
+            <h2>font</h2>
+            <p>폰트 스타일들을 모아서 한번에 표현</p>
+        </article>
+        <h1>문단 관련 스타일</h1>
+        <article class="para-style">
+            <p>문관 관련 스타일의 적용 유무를 확인하기 위한 영역</p>
+        </article>
+        <h1>목록 관련 스타일</h1>
+        <article class="lst-style">
+            <ol>
+                <li>목록 1</li><li>목록 2</li><li>목록 3 : 목록에 들어가는 내용이 길때 불릿 표기의 차이를 확인</li>
+            </ol>
+            <ul>
+                <li>목록 1</li><li>목록 2</li><li>목록 3 : 목록에 들어가는 내용이 길때 불릿 표기의 차이를 확인</li>
+            </ul>
+        </article>
+        <h1>컨텐츠 영역 크기</h1>
+        <article class="content-style">
+            <div>컨텐츠 영역 1</div>
+            <div>컨텐츠 영역 2</div>
+        </article>
+        <h1>둥근 테두리</h1>
+        <article class="round-border">
+            <div>테두리가 둥근 모양</div>
+        </article>
+        <h1>position 속성</h1>
+        <article class="position-main">
+            <div class="p-relative">
+                요소 배치를 자연스러운 배치로 사용할 수 있게 만들면서
+                하위 요소에 대한 기준으로 사용할 수 있게 한다.
+                <div class="p-relative-child">
+                    relative 영역의 하위 요소
+                </div>
+            </div>
+            <div class="p-absolute">
+                요소의 배치를 절대 위치를 기준으로 배치 될 수 있도록 한다.
+                <div class="p-absolute-child">
+                    하위 요소
+                </div>
+            </div>
+            <div class="p-fixed">
+                요소의 배치를 브라우저 기준으로 배치한다.
+                <div class="p-fixed-child">
+                    하위 요소
+                </div>
+            </div>
+        </article>
+    </section>
+</body>
+</html> 
