@@ -1,0 +1,44 @@
+.paging {
+    width: 100%;
+    text-align: center;
+}
+
+.paging .num {
+    font-size: 13px;
+}
+
+.num:active {
+    text-decoration: underline;
+    color: black;
+    font-weight: 600;
+}
+
+.paging > a{
+    text-decoration: none;
+    color: rgb(112, 111, 111);
+    font-weight: 100;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.paging .active {
+    text-decoration: underline;
+    color: black;
+    font-weight: 600;
+}
+.lt, .gt {
+    border: 1px solid lightgrey;
+    width: 100px;
+    height: 10px;
+    color: black;
+}
+
+.table td {
+    border-bottom: 1px solid gainsboro;
+    font-size: 14px;
+    line-height: 26px;
+}
+
+.column-content, .column-date  {
+    
+}

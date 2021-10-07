@@ -1,0 +1,80 @@
+.main {
+    border: 1px solid lightgrey;
+    max-width: 100%;
+    padding-top: 16px;
+    border-radius: 8px;
+    height: auto;
+}
+
+.username-input, .password-input{
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    margin-top: 8px;
+}
+
+.username, .password{
+    margin: 0 3% 20px 2%;
+}
+
+.remember {
+    margin-left: 2%;
+    margin-top: 20px;
+    margin-right: 3%;
+    
+}
+
+.remember-me {
+    float: left;
+    margin-top: 5px;
+}
+
+.forgot-pass {
+   float: right;
+   color: rgb(45, 114, 218);
+   text-decoration: none;
+}
+
+.forgot-pass:hover {
+    color: black;
+    transition-duration: 1s;
+ }
+
+
+.sign-in {
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.sign-in-btn {
+    width: 100%;
+    height: 35px;
+    font-size: 16px;
+    font-weight: 100;
+    color: white;
+    background-color: rgb(57, 126, 230);
+    border-width: 0;
+}
+
+.sign-in-btn:hover{
+    box-shadow: 5px 5px 5px rgb(26, 56, 112);
+    transition-duration: 1s;
+    cursor: pointer;
+}
+
+.donothave{
+    font-weight: 300;
+}
+
+.register{
+    text-decoration: none;
+    color: rgb(45, 114, 218);
+}
+
+.register:hover{
+    color: red;
+    transition-duration: 1s;
+}

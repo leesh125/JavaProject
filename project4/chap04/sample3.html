@@ -2,36 +2,47 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>수직 메뉴</title>
+    <title>테이블</title>
     <link rel="stylesheet" rel="stylesheet" href="/static/css/ch4_3.css">
 </head>
 <body>
     <div>
-        <ul class="top-menu">
-            <li class="menu-item">
-                <a href="#">메뉴 1</a>
-            </li>
-            <li class="menu-item">
-                <a href="#" class="active">메뉴 2</a>
-            </li>
-            <li class="menu-item">
-                <a href="#">메뉴 3</a>
-            </li>
-            <li class="menu-item">
-                <a href="#">메뉴 4</a>
-            </li>
-            <li class="menu-item dropdown">
-                <a href="#">메뉴 5</a>
-                    <ul class="sub-menu">
-                        <li class="sub-menu-item">
-                            <a href="#">하위 메뉴 1</a>
-                        </li>
-                        <li class="sub-menu-item">
-                            <a href="#">하위 메뉴 2</a>
-                        </li>
-                    </ul>
-            </li>
-        </ul>
+        <table>
+            <colgroup>
+                <col class="w-80">
+                <col class="mw-240">
+                <col class="w-160">
+                <col class="w-240">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th class="left">번호</th>
+                    <th class="left">제목</th>
+                    <th class="left">작성자</th>
+                    <th class="left">날짜</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>사용자 작성글의 제목입니다.</td>
+                    <td>홍길동</td>
+                    <td>2021-01-01</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>사용자 작성글의 제목입니다.</td>
+                    <td>홍길동</td>
+                    <td>2021-01-01</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>사용자 작성글의 제목입니다.</td>
+                    <td>홍길동</td>
+                    <td>2021-01-01</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>

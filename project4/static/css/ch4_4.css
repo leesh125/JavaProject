@@ -1,0 +1,79 @@
+.btn {
+    background-color: #b33693;
+    color: white;
+    padding: 0.5em 1em;
+    border-style: none;
+    border-radius: 4px;
+}
+
+.btn:hover {
+    background-color: #b91d92;
+    cursor: pointer;
+}
+
+
+.btn:active {
+    box-shadow: 0 0 4px #be0b92;
+}
+
+[type=text] {
+    padding: 0.25em 0.5em;
+    border-style: solid;
+    border-color: #dcdcdc;
+    border-width: 1px;
+    border-radius: 4px;
+}
+
+[type=text]:hover {
+    border-color: #b91d92;
+}
+
+[type=text]:focus {
+    outline-style: none;
+    border-color: #b91d92;
+}
+
+.paging > a {
+    border: 1px solid #b91d92;
+    padding: 0.5em 1em;
+    color: #9b0174;
+    font-weight: bold;
+    text-decoration: none;
+    float: left;
+}
+
+.paging .active {
+    background-color: #9b0174;
+    color: white;
+}
+
+.paging a:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.paging a:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.clear {
+    clear: both;
+}
+
+.w120 {
+    width: 120px;
+}
+
+.w240 {
+    width: 240px;
+}
+
+.wfull {
+    width: 100%;
+}
+
+.circle {
+    padding: 0.5em 1em;
+    border-radius: 50%;
+}
