@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>네이버 회원가입</title>
+    <link rel="stylesheet" href="/static/css/ch4_7.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="main">
+        <div class="username">
+            <span>아이디</span>
+            <br>
+            <div class="input-class">
+                <span>
+                    <input type="text" class="username-input" placeholder="@naver.com">
+                </span>
+                
+            </div>
+        </div>
+        
+        <div class="password">
+            <span class="span-password">비밀번호</span>
+            <br>
+            <div class="password-input-oth" >
+                <span style="border: none;
+                             width: 80%;
+                             outline: none;"> 
+                   <input type="text" class="input-pass">
+                </span>
+                <span class="lockicon">
+                    <i class="fa fa-lock" style="font-size:32px;color:rgb(192, 191, 191);"></i>
+                </span>
+            </div>
+        </div>
+        <div class="password">
+            <span class="span-password">비밀번호 재확인</span>
+            <br>
+            <input type="text" class="password-input">
+        </div>
+        <br>
+        <div class="name">
+            <span class="span-name">이름</span>
+            <br>
+            <input type="text" class="name-input">
+        </div>
+        <div class="birth">
+            <span class="span-birth">생년월일</span>
+            
+            <div class="birth-div">
+                
+                <input type="text" class="year-input" placeholder="년(4자)">
+                <select id="month" name="month" class="month-input">
+                    <option>월</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                <input type="text" class="date-input" placeholder="일">
+            </div>
+        </div>
+        <div class="sex">
+            <span class="span-sex">성별</span>
+            <select id="sex" name="sex" class="sex-input">
+                <option>성별</option>
+                <option value="man">남자</option>
+                <option value="woman">여자</option>
+                <option value="etc">기타</option>
+            </select>
+        </div>
+        <div class="name">
+            <span class="span-name">본인 확인 이메일</span><span style="color: rgb(156, 154, 154); font-size: 13px;">(선택)</span>
+            <br>
+            <input type="text" class="email-input" placeholder="선택입력">
+        </div>
+        <div class="phone">
+            <span class="span-phone">휴대전화</span>
+            <select id="sex" name="sex" class="phone-input">
+                <option>대한민국 +82</option>
+                <option value="man">남자</option>
+                <option value="woman">여자</option>
+                <option value="etc">기타</option>
+            </select>
+            <div class="phone-certificate">
+                <div class="phone-certi-div">
+                    <input type="text" class="phonenumber-input" placeholder="전화번호 입력">
+                    <div class="certificate-btn">
+                        <p style="text-align: center; margin-top: 13px;">인증번호 받기</p>
+                    </div>
+                </div>
+                <div class="certificate-div">
+                    <input type="text" class="certificate-input" placeholder="인증번호를 입력하세요">
+                </div>
+            </div>
+        </div>
+        <div class="sign-in">
+            <button type="button" class="sign-in-btn">가입하기</button>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+
+</script>

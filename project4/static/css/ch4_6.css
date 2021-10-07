@@ -1,6 +1,7 @@
 .paging {
     width: 100%;
     text-align: center;
+    margin-top: 50px;
 }
 
 .paging .num {
@@ -33,12 +34,55 @@
     color: black;
 }
 
-.table td {
-    border-bottom: 1px solid gainsboro;
-    font-size: 14px;
-    line-height: 26px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.column-content, .column-date  {
-    
+.table-section {
+    width: 840px;
+}
+
+.table {
+    border-top-style: solid;
+    border-width: 1px;
+    border-color: black;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.table td, .table th {
+    border-bottom-style: solid;
+    border-width: 1px;
+    border-color: #dfdfdf;
+    padding: 12px 16px;
+}
+
+.w-160 {
+    width: 160px;
+}
+
+.column-title {
+    font-weight: 500;
+}
+
+.column-title > a {
+    text-decoration: none;
+    color: black;
+}
+
+.column-title > a:hover {
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.column-date {
+    text-align: center;
+    color: #636363;
+}
+
+.center {
+    text-align: center;
 }
