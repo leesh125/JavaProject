@@ -7,14 +7,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+    <form>
     <div class="main">
         <div class="username">
             <span>아이디</span>
             <br>
-            <div class="input-class">
-                <span>
-                    <input type="text" class="username-input" placeholder="@naver.com">
+            <div class="input-class" style="display: flex;">
+                <span style="display: flex; width: 100%;">
+                    <input type="text" class="username-input" style="width: 100%;">
                 </span>
+                <span style="line-height: 40px; margin-right: 18px; font-weight: 500; color: rgb(153, 151, 151);">
+                    @naver.com
+                </span>
+
                 
             </div>
         </div>
@@ -77,9 +82,9 @@
             <span class="span-phone">휴대전화</span>
             <select id="sex" name="sex" class="phone-input">
                 <option>대한민국 +82</option>
-                <option value="man">남자</option>
-                <option value="woman">여자</option>
-                <option value="etc">기타</option>
+                <option value="man">010</option>
+                <option value="woman">011</option>
+                <option value="etc">016</option>
             </select>
             <div class="phone-certificate">
                 <div class="phone-certi-div">
@@ -94,9 +99,10 @@
             </div>
         </div>
         <div class="sign-in">
-            <button type="button" class="sign-in-btn">가입하기</button>
+            <button type="submit" class="sign-in-btn">가입하기</button>
         </div>
     </div>
+    </form>
 </body>
 </html>
 <script>

@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    font-family: "Open Sans",sans-serif;
+}
+.docker-head{
+    width: 100%;
+}
+nav > .logo {
+    padding: 8px 16px;
+}
+nav > .logo > img {
+    width: 160px; height: 36px;
+}
+.header-span {
+    float: left;
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-bottom: 15px;
+    padding-right: 20px;
+    font-size: 18px;
+    line-height: 20px;
+    
+}
+.header-nav {
+    display: flex;
+    height: 55px;
+    background-color: rgb(58, 150, 236);
+}
+
+.header-ul{
+    padding: 0;
+    margin-top: 0;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+.header-ul li{
+    list-style: none;
+    float: left;
+}
+
+.header-ul li a{
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 5px;
+    height: 55px;
+    margin: 0 4px 0 4px;
+    padding: 18px 12px 9px;
+    display: block;
+}
+
+.menulink1{
+    border-bottom: 4px solid rgba(255,255,255,0.5);
+}
+
+.menulink:hover , .menulink1:hover{
+    border-bottom: 4px solid rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.75);
+}
+
+nav > .theme-switch {
+    display: inline-block;
+    margin: 0 12px;
+}
+
+.switch-check {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    bottom: 7px;
+}
+.switch-check > input[type=checkbox] {
+    opacity: 0;
+}
+.switch-check > .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #93cbf6;
+    border-radius: 15px;
+}
+.switch-check > .slider::before {
+    position: absolute;
+    content: "";
+    width: 24px;
+    height: 24px;
+    left: 2px;
+    bottom: 3px;
+    background-color:#2697ed;
+    border-radius: 12px;
+    transition: 0.5s;
+}
+
+.switch-check > input[type=checkbox]:checked + .slider::before {
+    transform: translateX(32px);
+}
+
+.search-div{
+    width: 750px;
+    margin-top: 70px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 120px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.search-div-h2 {
+    text-align: center;
+    font-weight: 500;
+    font-size: 30px;
+}
+
+.search-div-form input{
+    font-size: 18px;
+    height: 50px;
+    width: 66.6666%;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding-left: 20px;
+    border: 1px solid rgb(158, 157, 157);
+    border-radius: 5px;
+}
+
+.search-div-form input::placeholder{
+    color: rgb(180, 179, 179);
+    font-weight: 100;
+}
+
+
+.search-div-form input:focus{
+    border: 1px solid white;
+    outline: 1px solid rgb(32, 109, 224);
+}
+.search-div-form {
+    float: left;
+    width: 92%;
+}
+
+.search-div-form-div {
+    height: 50px;
+}
+
+.body-cont{
+    
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left:  auto;
+}
+
+.row{
+    display: table;
+}
+
+@media (min-width: 768px){
+    .body-cont {
+        width: 750px;
+    }
+}
+
+.card{
+    color: #33444d;
+    background-color: #fff;
+    box-shadow: 0 3px 6px rgb(11 33 74 / 9%), 0 -2px 2px rgb(11 33 74 / 3%);
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.card:nth-child(2n+1) {
+    margin-right: 16px;
+}
+
+@media (min-width: 768px){
+    .card {
+        width: 48%;
+        float: left;
+        padding: 5px;
+    }
+}
+
+.card-a{
+    display: inline-block;
+    background-image: url("https://docs.docker.com/images/rocket.svg");
+    background-size: auto 50px;
+    min-height: 220px;
+    background-origin: content-box;
+    background-repeat: no-repeat;
+    background-position-x: 8px;
+    padding: 20px;
+}
+
+.card-a:hover {
+    opacity: 1;
+    transform: scale(1.01);
+    transition: transform 150ms ease-in-out;
+}
+.card-h5{
+    margin-top: 70px;
+    font-size: 18px;
+    line-height: 20px;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.card-p {
+    font-size: 15px;
+    font-weight: 400;
+    color: rgb(88, 86, 86);
+    margin-top: 0;
+}
