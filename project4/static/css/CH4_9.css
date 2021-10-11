@@ -1,0 +1,62 @@
+.wholeDiv {
+    width: 50%;
+}
+
+.titleDiv, .contentDiv, .fileDiv{
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.titleLabel,.contentLabel,.fileLabel{
+    width: 80px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+#title, #content {
+    width: 70%;
+}
+
+.contentLabel{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#content{
+    resize: none;
+}
+
+#content::placeholder{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.submitDiv{
+    margin-top: 20px;
+    margin-right: 5px;
+    text-align: center;
+}
+
+table{
+    width: 100%;
+}
+
+thead{
+    height: 35px;
+}
+thead, tfoot{
+    text-align: center;
+    background-color: rgb(250, 156, 112);
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+
+table button {
+    width: 100%;
+}
+
+tbody{
+    background-color: rgb(245, 245, 206);
+}
