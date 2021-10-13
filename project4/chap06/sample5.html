@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="/static/js/ch06_5.js"></script>
+    <style>
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <h2>if 조건문</h2>
+    <pre><code>
+    if (조건식) { 
+        조건식이 참일 때 수행할 코드
+    }
+    </code></pre>
+
+    <pre><code>
+        if (조건식) { 
+            조건식이 참일 때 수행할 코드
+        } else {
+            조건식이 거짓일 때 수행할 코드
+        }
+    </code></pre>
+    
+    <pre><code>
+        if (조건식1) { 
+            조건식이 참일 때 수행할 코드
+        } else if(조건식2) {
+            조건식1이 거짓이고 조건식2 가 참일 때 수행할 코드
+        } else {
+            조건식1, 조건식2 가 전부 거짓일 떄 수행할 코드
+        }
+    </code></pre>
+
+    <pre><code>
+        if (조건식1) { 
+            조건식이 참일 때 수행할 코드
+        } else if(조건식2) {
+            조건식1이 거짓이고 조건식2 가 참일 때 수행할 코드
+        } else {
+            조건식1, 조건식2 가 전부 거짓일 떄 수행할 코드
+        }
+    </code></pre>
+    
+    <pre><code>
+        if (x % 2 == 0) { 
+            document.getElementById("res1").innerHTML = "짝수입니다.";
+        } else {
+            document.getElementById("res1").innerHTML = "홀수입니다.";
+        } 
+    </code></pre>
+
+    <div>
+        <label for="">x = </label><input type="text" id="var1">
+        <button type="button" onclick="f1();">확인</button>
+    </div>
+    <div id="res1"></div>
+
+    <hr>
+
+    <h2>switch 문</h2>
+    <pre><code>
+    switch (식) {
+        case 값1 :
+            식의 결과가 값1에 매치되는 경우 수행할 코드
+            break;
+        case 값2 :
+            식의 결과가 값2에 매치되는 경우 수행할 코드
+            break;
+        case 값3 :
+            식의 결과가 값3에 매치되는 경우 수행할 코드
+            break;
+        default:
+            식의 결과가 어떠한 case에도 매치되지 않는 경우
+    }
+    </code></pre>
+    <h3>예제 코드</h3>
+    <pre><code>
+        switch (x) {
+            case 1 :
+                document.getElementById("res2").innerHtml = "1 입니다.";
+                break;
+            case 2 :
+                document.getElementById("res2").innerHtml = "2 입니다.";
+                break;
+            default:
+                document.getElementById("res2").innerHtml = "1 또는 2가 아닙니다.";
+        }
+        </code></pre>
+        <div>
+            <label for="">x = </label><input type="text" id="var2">
+            <button type="button" onclick="f2();">확인</button>
+        </div>
+        <div id="res2"></div>
+        <h3>예제 코드</h3>
+        <pre><code>
+            for(var i=0; i &lt; x; i++) {
+                document.getElementById("res3").innerHTML += 1;
+            }
+        </code></pre>
+        <div>
+            <label for="">x = </label><input type="text" id="var3">
+            <button type="button" onclick="f3();">확인</button>
+        </div>
+        <div id="res3"></div>
+        <h3>예제 코드</h3>
+        <pre><code>
+        var i = 0;
+        while(i &lt; x){
+            document.getElementById("res4").innerHTML += i;
+        }
+        </code></pre>
+        <div>
+            <label for="">x = </label><input type="text" id="var4">
+            <button type="button" onclick="f4();">확인</button>
+        </div>
+        <div id="res4"></div>
+
+        <hr>
+
+        <h2>for ... in 문</h2>
+        <pre><code>
+        for(변수명 in 객체) {
+            객체가 가지는 속성에 대하여 반복을 진행
+            반복 수행할 코드
+        }
+        </code></pre>
+        <h3>예제 코드</h3>
+        <pre><code>
+            var obj = {a: 1, b: 2, c: 3, d: 4}
+            for(var name in obj) {
+                document.getElementById("res5").innerHTML += name + "&lt;br&gt;";
+            }
+        </code></pre>
+        <div>
+            <button type="button" onclick="f5();">확인</button>
+        </div>
+        <div id="res5"></div>
+        
+        <hr>
+
+        <h2>for ... of 문</h2>
+        <pre><code>
+        for(변수명 of 객체) {
+            반복가능한 객체에 담긴 값을 사용하여 진행
+            반복 수행할 코드
+        }
+        </code></pre>
+        <h3>예제 코드</h3>
+        <pre><code>
+            var obj = [1, 2, 3, 4];
+            for(var v of obj) {
+                document.getElementById("res6").innerHTML += v + "&lt;br&gt;";
+            }
+        </code></pre>
+        <div>
+            <button type="button" onclick="f6();">확인</button>
+        </div>
+        <div id="res6"></div>
+</body>
+</html>
