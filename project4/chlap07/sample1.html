@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link type="text/css" rel="stylesheet" href="/static/css/ch07_1.css">
+    <script type="text/javascript" src="/static/js/ch07_1.js"></script>
+</head>
+<body>
+    <h2>배열</h2>
+    <p>var 변수명 = [값1, 값2, 값3, ...];<br>
+        위와 같은 형식으로 사용.</p>
+    <p>배열에 담을 수 있는 데이터 타입(자료형)은 제한이 없다.</p>
+    <p>new 연산자와 Array 객체를 통해 생성 가능</p>
+    <p>var 변수명 = new Array();<br>
+        var 변수명 = new Array(크기);<br>
+        var 변수명 = new Array(값1, 값2, ...);<br></p>
+
+    <hr>
+
+    <h2>구구단 결과 출력</h2>
+
+    <div>
+        <label>x = </label><input type="text" id="var1">
+        <button type="button" onclick="f1();">확인</button>
+        <label id="alert1" class="hidden">
+            <small>1 ~ 19 사이의 값으로만 입력하세요.</small>
+        </label>
+    </div>
+    <div id="res1"></div>
+
+    <hr>
+
+    <h2>로또 번호 출력</h2>
+    <div>
+        <label>로또 번호 6자리를 고르세요 <small>'(쉼표)로 구분</small></label>
+        <br>
+        <input type="text" id="lotInput">
+        <button type="button" onclick="myLotto();">생성</button>
+        <label id="alert2" class="hidden">
+            <small>쉼표 구분하여 6개의 숫자를 입력하세요.</small>
+        </label>
+        <label id="alert3" class="hidden">
+            <small>올바른 숫자를 입력하세요(1~45사이의 숫자)</small>
+        </label>
+        <div id="lotRes"></div>
+    </div>
+    <br>
+    <div>
+        <button type="button" onclick="f2();">로또번호 생성</button>
+    </div>
+    <div id="res2"></div>
+    <div id="res3"></div>
+</body>
+</html>

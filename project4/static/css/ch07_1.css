@@ -1,0 +1,27 @@
+.hidden {
+    display: none;
+}
+
+.error {
+    display: block;
+    color: lightcoral;
+}
+
+#res2, #lotRes{
+    margin-top: 20px;
+}
+
+.lot {
+    display: inline-block;
+    border: 2px solid;
+    border-radius: 50%;
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    box-shadow: inset -4px 4px 12px;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
