@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>수직 메뉴</title>
-    
+    <link rel="stylesheet" rel="stylesheet" href="/static/css/ch4_1.css">
+    <script src="/static/js/ch08_2.js"></script>
 </head>
 <body>
     <div class="nav">
@@ -31,6 +32,11 @@
             
         </ul>
     </div>
-    
+    <div>
+        <h3>메뉴 추가</h3>
+        <label for="id_add_menu"></label>
+        <input type="text" id="id_add_menu">
+        <button type="button" onclick="addMenu(id_add_menu.value);">확인</button>
+    </div>
 </body>
 </html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/static/css/ch4_5.css">
+    <script src="/static/js/ch08_3.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="main">
+        <div class="username">
+            <span>Username or email</span>
+            <br>
+            <input type="text" class="username-input required-error-input">
+        </div>
+        
+        <div class="password">
+            <span class="span-password">Password</span>
+            <br>
+            <input type="password" class="password-input required-error-input" id="id_pass">
+        </div>
+        <div>
+            <label for=""><input type="checkbox" id="id_chk_show_pass" onclick="hiddenPass(this);">show password</label>
+        </div>
+        <div class="remember">
+            <input type="checkbox" class="remember-me">Remember me
+            
+            <a href="#" class="forgot-pass">Forgot your password?</a>
+        </div>
+        <div class="sign-in">
+            <button type="button" class="sign-in-btn">Sign in</button>
+        </div>
+    </div>
+    <span class="donothave">Don't have an account yet?</span>  <a href="#" class="register">Register now</a>
+</body>
+</html>
