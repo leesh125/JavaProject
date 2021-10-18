@@ -1,0 +1,27 @@
+.error{
+    color: white;
+    background-color: red;
+}
+
+table {
+    width: 400px;
+    height: 400px;
+}
+
+thead{
+    height: 80px;
+}
+
+td {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    width: 25%;
+}
+
+table button {
+    width: 100%;
+    height: 100%;
+    font-size: 28px;
+    font-weight: 600;
+}

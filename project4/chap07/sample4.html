@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="/static/js/ch07_4.js"></script>
+    <link rel="stylesheet" href="/static/css/ch07_4.css">
+</head>
+<body>
+    <div>
+        <input type="text" id="denominator" placeholder="나눠질 수">
+        <select name="op" id="op">
+            <option value="plus">+</option>
+            <option value="minus">-</option>
+            <option value="multiply">*</option>
+            <option value="divide">/</option>
+            <option value="remainder">%</option>
+        </select>
+        <input type="number" id="numerator" placeholder="나눌 수">
+        <button type="button" id="calbtn" onclick="calc();">=</button>
+        <input type="text" id="res" class="res" placeholder="계산결과">
+    </div>
+    <div>
+        <span class="" style="display: none;">0으로는 나눌 수 없습니다.</span>
+    </div>
+
+    <hr>
+
+    <h1>Practice2-2</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <td colspan="4" id="res"><span id="tdspan"></span></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><button id="C" type="button" onclick="calculator(this.id);">C</button></td>
+                <td><button id="bs" type="button" onclick="calculator(this.id);">bs</button></td>
+                <td><button id="%" type="button" onclick="calculator(this.id);">%</button></td>
+                <td><button id="/" type="button" onclick="calculator(this.id);">/</button></td>
+            </tr>
+            <tr>
+                <td><button id="7" type="button" onclick="calculator(this.id);">7</button></td>
+                <td><button id="8" type="button" onclick="calculator(this.id);">8</button></td>
+                <td><button id="9" type="button" onclick="calculator(this.id);">9</button></td>
+                <td><button id="X" type="button" onclick="calculator(this.id);">X</button></td>
+            </tr>
+            <tr>
+                <td><button id="4" onclick="calculator(this.id);" type="button">4</button></td>
+                <td><button id="5" onclick="calculator(this.id);" type="button">5</button></td>
+                <td><button id="6" onclick="calculator(this.id);" type="button">6</button></td>
+                <td><button id="-" onclick="calculator(this.id);" type="button">-</button></td>
+            </tr>
+            <tr>
+                <td><button id="1" type="button" onclick="calculator(this.id);">1</button></td>
+                <td><button id="2" type="button" onclick="calculator(this.id);">2</button></td>
+                <td><button id="3" type="button" onclick="calculator(this.id);">3</button></td>
+                <td><button id="+" type="button" onclick="calculator(this.id);">+</button></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button id="0" type="button">0</button></td>
+                <td><button id="." type="button" onclick="calculator(this.id);">.</button></td>
+                <td><button id="=" type="button" onclick="calculator(this.id);">=</button></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
