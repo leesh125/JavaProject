@@ -182,7 +182,7 @@
                 <td>select : 어떠한 텍스트가 선택되고 있을 때 발생</td>
                 <td>dragstart : 드래그를 시작할 때 발생</td>
                 <td>drag : 드래그 하고 있는 동안 발생</td>
-                <td>dragend : 드래그가 끝났을 때 발생</td>
+                <td>dragend : 드래그가 끝났을 때 발생(마우스버튼 해제 및 Esc키 입력 시)</td>
                 <td>dragenter : 드래그된 요소나 텍스트 선택이 유효한 드랍 대상에 들어 왔을 때</td>
             </tr>
             <tr>
@@ -227,6 +227,41 @@
                                 }
                             );
                         }
+                        var droparea = document.getElementById("id_droparea");
+                        droparea.addEventListener("dragover",
+                            function(e) {
+                                e.preventDefault();
+                            }
+                        );
+                        droparea.addEventListener("dragenter",
+                            function(e) {
+                                e.target.style = "background-color: rgb(250, 250, 250);"
+                            }
+                        );
+                        droparea.addEventListener("dragleave",
+                            function(e) {
+                                e.target.style = "background-color: gray;"
+                            }
+                        );
+                        droparea.addEventListener("drop",
+                            function(e) {
+                                e.preventDefault();
+                                if(e.dataTransfer.items) {
+                                    e.target.innerText = "";
+                                    for(var i = 0; i < e.dataTransfer.items.length; i++) {
+                                        if(e.dataTransfer.items[i].kind == "file" && e.dataTransfer.items[i].type == "text/plain") {
+                                            var f = e.dataTransfer.items[i].getAsFile();
+                                            e.target.innerText += ", " + f.name;
+                                            f.text().then(function(d) {
+                                                document.getElementById("file_context").value = d;
+                                            });
+                                        } else {
+                                            document.getElementById("id_droparea").innerText = "text 파일 형식만 지원 합니다.";
+                                        }
+                                    }
+                                }
+                            }
+                        );
                     }
                     window.addEventListener("load",
                         function() {
@@ -255,6 +290,10 @@
                 <button type="reset">리셋</button>
                 <button type="submit">제출</button>
             </div>
+            <div id="id_droparea" style="background-color: gray">
+                파일 드랍 영역
+            </div>
+            <textarea id="file_context" cols="30" rows="10" readonly></textarea>
             <div>
                 <button type="button" id="btn_fullscreen">전체화면</button>
             </div>
