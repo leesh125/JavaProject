@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>회원 가입</title>
+	<script type="text/javascript" src="/static/js/myfunctions.js"></script>
+</head>
+<body>
+	<section>
+		<form action="./join_process.jsp" method="get">
+			<div>
+				<label>아이디 : </label><input type="text" name="username">
+			</div>
+			<div>
+				<label>패스워드 : </label><input type="password" name="password">
+			</div>
+			<div>
+				<label>성별 : </label>
+				<input type="radio" name="gender" value="m"><label>남</label>
+				<input type="radio" name="gender" value="f"><label>여</label>
+			</div>
+			<div>
+				<label>광고 수신 동의 : </label>
+				<input type="checkbox" name="adv" value="sms"><label>SMS</label>
+				<input type="checkbox" name="adv" value="email"><label>Email</label>
+				<input type="checkbox" name="adv" value="post"><label>우편</label>
+			</div>
+			<div>
+				<label>생년월일</label>
+				<input type="number" name="year" min="1900" max="2021">
+				<select name="month">
+				</select>
+				<input type="number" name="day" min="1" max="31">
+			</div>
+			<div>
+				<label>내용</label>
+				<textarea name="context"></textarea>
+			</div>
+			<div>
+				<label>첨부파일</label>
+				<input type="file" name="upload"></input>
+			</div>
+			<div>
+				<button type="submit">전송</button>
+			</div>
+		</form>
+	</section>
+</body>
+</html>
