@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -13,7 +15,7 @@
             <h1>회원가입</h1>
         </div>
         <div class="join-form">
-            <form action="./join_process.jsp" method="post">
+            <form action="./join" method="post">
                 <div class="join-info1">
                     <div class="input-form">
                         <label for="">아이디</label>
@@ -109,4 +111,4 @@
         </div>
     </div>
 </body>
-</html> 
+</html>
