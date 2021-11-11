@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import= "com.web.guestbook.model.*"%>
+<%@ page import= "java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,24 +40,20 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td>xxx.xxx.1.1</td>
-					<td>방명록 내용이 출력되는 영역 입니다.</td>
-					<td>2021-11-12</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>xxx.xxx.1.1</td>
-					<td>방명록 내용이 출력되는 영역 입니다.</td>
-					<td>2021-11-13</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td>xxx.xxx.1.1</td>
-					<td>방명록 내용이 출력되는 영역 입니다.</td>
-					<td>2021-11-14</td>
-				</tr>
+				<%
+					List<GuestBookDTO> datas = (List<GuestBookDTO>) request.getAttribute("datas");
+					for(GuestBookDTO data: datas){
+			 	%>
+			 		<tr>
+						<td><%=data.getId() %></td>
+						<td><%=data.getIpaddr() %></td>
+						<td><%=data.getContext() %></td>
+						<td><%=data.getDate() %></td>
+					</tr>
+			 	<%
+					}
+			 	%>
+				
 			</tbody>		
 		</table>
 	</section>

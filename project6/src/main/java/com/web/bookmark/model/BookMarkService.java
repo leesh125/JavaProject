@@ -1,13 +1,13 @@
-package com.web.guestbook.model;
+package com.web.bookmark.model;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class GuestBookService {
-	public boolean add(GuestBookDTO dto) {
+public class BookMarkService {
+	public boolean add(BookMarkDTO dto) {
 		boolean res = false;
 		try {
-			GuestBookDAO dao = new GuestBookDAO();
+			BookMarkDAO dao = new BookMarkDAO();
 			res = dao.insert(dto);
 			if(res) {
 				dao.commit();
@@ -22,11 +22,11 @@ public class GuestBookService {
 		return false;
 	}
 	
-	public List<GuestBookDTO> getList() {
-		GuestBookDAO dao = null;
-		List<GuestBookDTO> datas = null;
+	public List<BookMarkDTO> getList() {
+		BookMarkDAO dao = null;
+		List<BookMarkDTO> datas = null;
 		try {
-			dao = new GuestBookDAO();
+			dao = new BookMarkDAO();
 			datas = dao.select();
 		} catch (SQLException e) {
 			e.printStackTrace();

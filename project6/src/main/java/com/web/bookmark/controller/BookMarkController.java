@@ -1,4 +1,4 @@
-package com.web.guestbook.controller;
+package com.web.bookmark.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,40 +10,44 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.web.guestbook.model.GuestBookDTO;
-import com.web.guestbook.model.GuestBookService;
+import com.web.bookmark.model.BookMarkDTO;
+import com.web.bookmark.model.BookMarkService;
 
-@WebServlet("/guest")
-public class GuestBookController extends HttpServlet {
+
+
+@WebServlet("/bookmark")
+public class BookMarkController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+ 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GuestBookService service = new GuestBookService();
+		BookMarkService service = new BookMarkService();
 		
 		request.setAttribute("datas", service.getList());
 		
-		String view = "/WEB-INF/jsp/guestbook/index.jsp";
+		String view = "/WEB-INF/jsp/bookmark/index.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String context = request.getParameter("context");
-		String ipaddr = request.getRemoteAddr();
+		String nickname = request.getParameter("nickname");
+		String url = request.getParameter("url");
 		
-		GuestBookDTO dto = new GuestBookDTO(ipaddr,context);
-		GuestBookService service = new GuestBookService();
+		if(nickname == "") {
+			nickname = url;
+		}
+		
+		BookMarkDTO dto = new BookMarkDTO(nickname,url);
+		BookMarkService service = new BookMarkService();
+		
 		if(service.add(dto)) {
-			// 저장 완료
-			response.sendRedirect("/guest");
+			response.sendRedirect("/bookmark");
 		} else {
-			// 저장 실패	
-			System.out.println("!@#$@#@");
 			request.setAttribute("init", dto);
 			request.setAttribute("datas", service.getList());
-			String view = "/WEB-INF/jsp/guestbook/index.jsp";
+			String view = "/WEB-INF/jsp/bookmark/index.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(view);
 			rd.forward(request, response);
 		}
