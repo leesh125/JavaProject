@@ -17,9 +17,10 @@ import com.web.guestbook.model.GuestBookService;
 public class GuestBookController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private GuestBookService service = null;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GuestBookService service = new GuestBookService();
-		
+		service = new GuestBookService();
 		request.setAttribute("datas", service.getList());
 		
 		String view = "/WEB-INF/jsp/guestbook/index.jsp";
@@ -27,27 +28,38 @@ public class GuestBookController extends HttpServlet {
 		rd.forward(request, response);
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		String context = request.getParameter("context");
-		String ipaddr = request.getRemoteAddr();
-		
-		GuestBookDTO dto = new GuestBookDTO(ipaddr,context);
-		GuestBookService service = new GuestBookService();
-		if(service.add(dto)) {
-			// 저장 완료
-			response.sendRedirect("/guest");
-		} else {
-			// 저장 실패	
-			System.out.println("!@#$@#@");
-			request.setAttribute("init", dto);
-			request.setAttribute("datas", service.getList());
-			String view = "/WEB-INF/jsp/guestbook/index.jsp";
-			RequestDispatcher rd = request.getRequestDispatcher(view);
-			rd.forward(request, response);
-		}
-		
-	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        
+        String id = request.getParameter("id");
+        String context = request.getParameter("context");
+        String ipaddr = request.getRemoteAddr();
 
+        if(id == null) {
+	        GuestBookDTO dto = new GuestBookDTO(ipaddr, context);
+	        service = new GuestBookService();
+
+	        if(service.add(dto)) {
+	            response.sendRedirect("/guest");
+	        } else {
+	        	request.setAttribute("init", dto);
+	        	request.setAttribute("datas", service.getList());
+	            String view = "/WEB-INF/jsp/guestbook/index.jsp";
+	            RequestDispatcher rd = request.getRequestDispatcher(view);
+	            rd.forward(request, response);
+	        }
+        } else {
+        	GuestBookDTO dto = new GuestBookDTO();
+        	service = new GuestBookService();
+
+        	dto.setId(id);
+        	dto.setContext(context);
+        	if(service.modify(dto)) {
+        		response.sendRedirect("/guest");
+        	} else {
+        		response.sendRedirect("/guest");
+        	}
+        }
+    }
 }

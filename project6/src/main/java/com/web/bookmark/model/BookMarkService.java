@@ -3,6 +3,8 @@ package com.web.bookmark.model;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.web.guestbook.model.GuestBookDTO;
+
 public class BookMarkService {
 	public boolean add(BookMarkDTO dto) {
 		boolean res = false;
@@ -34,4 +36,6 @@ public class BookMarkService {
 		
 		return datas;
 	}
+	
+	
 }

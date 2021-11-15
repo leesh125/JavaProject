@@ -53,6 +53,14 @@ public class OracleCloudConnect {
 		this.stat = this.conn.createStatement();
 		return this.stat.executeUpdate(query);
 	}
+	
+	public int updateQuery(String query) throws SQLException {
+		return this.insertQuery(query);
+	}
+
+	public int deleteQuery(String query) throws SQLException {
+		return this.insertQuery(query);
+	}
 
 	public void close() throws SQLException {
 		// 모든 작업을 완료 후에는 자원을 반납 하기위해 close();

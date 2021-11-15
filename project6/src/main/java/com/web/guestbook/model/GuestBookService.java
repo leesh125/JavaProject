@@ -4,34 +4,74 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class GuestBookService {
+	private GuestBookDAO dao = null;
+	
+	public GuestBookService() {
+		this.dao = new GuestBookDAO();
+	}
 	public boolean add(GuestBookDTO dto) {
-		boolean res = false;
-		try {
-			GuestBookDAO dao = new GuestBookDAO();
-			res = dao.insert(dto);
-			if(res) {
-				dao.commit();
-				return true;
-			} else {
-				dao.rollback();
-				return false;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
+		boolean res = dao.insert(dto);
+        if(res) {
+            dao.commit();
+        } else {
+            dao.rollback();
+        }
+        dao.close();
+        return res;
 	}
 	
 	public List<GuestBookDTO> getList() {
-		GuestBookDAO dao = null;
-		List<GuestBookDTO> datas = null;
-		try {
-			dao = new GuestBookDAO();
-			datas = dao.select();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return datas;
-	}
+		List<GuestBookDTO> datas = dao.select();
+		dao.close();
+        return datas;
+    }
+	
+	public boolean modify(GuestBookDTO dto) {
+    	// 1. 기존에 저장된 데이터를 조회해야 한다.
+    	// 2. 조회한 데이터에 수정된 데이터로 교체한다.
+    	// 3. 교체된 데이터로 저장.
+    	GuestBookDTO data = getData(dto.getId());
+    	data.setContext(dto.getContext());
+    	return update(data);
+    }
+	
+	public boolean delete(GuestBookDTO dto) {
+    	// 1. 기존에 저장된 데이터를 조회한다.
+    	// 2. 조회된 데이터를 확인 후 삭제.
+    	GuestBookDTO data = getData(dto.getId());
+    	dao = new GuestBookDAO();
+    	boolean res = false;
+    	if(data.getId() != 0) {
+    		res = dao.delete(data);
+    	}
+    	if(res) {
+    		dao.commit();
+    	} else {
+    		dao.rollback();
+    	}
+    	dao.close();
+
+    	return res;
+    }
+    public GuestBookDTO getData(int id) {
+    	dao = new GuestBookDAO();
+    	GuestBookDTO data = dao.select(id);
+    	dao.close();
+
+    	return data;
+    }
+
+    private boolean update(GuestBookDTO dto) {
+    	dao = new GuestBookDAO();
+    	boolean res = dao.update(dto);
+
+    	if(res) {
+    		dao.commit();
+    	} else {
+    		dao.rollback();
+    	}
+
+    	dao.close();
+    	return res;
+    }
 }
