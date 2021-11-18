@@ -50,6 +50,8 @@ public class BookMarkController extends HttpServlet {
 			String view = "/WEB-INF/jsp/bookmark/index.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(view);
 			rd.forward(request, response);
+
+    		System.out.println("asdasd");
 		}
 		
 	}
