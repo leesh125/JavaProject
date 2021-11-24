@@ -24,6 +24,7 @@
     <%@ include file="./module/header.jsp" %>
     <ul>
     	<li><a href="/guest">방명록</a></li>
+    	<li><a href="/upload">파일 업로드</a></li>
     	<%
     		if(logined) {
     	%>
