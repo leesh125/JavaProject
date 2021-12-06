@@ -1,6 +1,9 @@
 package com.web.board.model;
 
 import com.web.board.model.BoardDTO;
+
+import java.util.List;
+
 import com.web.board.model.BoardDAO;
 
 public class BoardService {
@@ -18,5 +21,9 @@ public class BoardService {
         }
         dao.close();
         return res;
+	}
+	public List<BoardDTO> getList() {
+		BoardDAO dao = new BoardDAO();
+		return dao.selectAll();;
 	}
 }

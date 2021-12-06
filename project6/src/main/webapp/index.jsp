@@ -1,25 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpSession"
+		import="com.web.account.model.AccountDTO" %>
 <%@ page import="javax.servlet.http.Cookie" %>
+
+<%
+	AccountDTO dto = null;	
+	boolean logined = false;
+	if(session.getAttribute("logined") != null) {
+		logined = (boolean) session.getAttribute("logined");
+		dto = (AccountDTO) session.getAttribute("account_data");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head lang="ko">
     <meta charset="UTF-8">
     <title>메인 화면</title>
 </head>
-<%
-	
-	Cookie[] cookie = request.getCookies();
-	boolean logined = false;
-	String username = "";
-	
-	for(Cookie c: cookie){
-		if(c.getName().equals("login_name")) {
-			logined = true;
-			username = c.getValue();
-		}
-	}
-%>
 <body>
     <%@ include file="./module/header.jsp" %>
     <ul>
@@ -39,19 +37,9 @@
     </ul>
     
     <% 
-    	if(logined) { 
-    %>
-    		<h1>Cookie -> <%=username %> 님 환영합니다.</h1>
-   	<%
-    	}
+    String username = dto.getUsername();
    	%>
-   	
-   	<% 
-   		if(session.getAttribute("login_name") != null) {
-    %>
-    		<h1>Session -> <%=(String)session.getAttribute("login_name") %> 님 환영합니다.</h1>
-   	<%
-    	}
-   	%>
+    
+  	<h1><%=username %> 님 환영합니다.</h1>
 </body>
 </html> 

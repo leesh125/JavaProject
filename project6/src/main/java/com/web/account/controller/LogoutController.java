@@ -1,4 +1,4 @@
-package com.web.login.controller;
+package com.web.account.controller;
 
 import java.io.IOException;
 
@@ -16,23 +16,14 @@ public class LogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Cookie[] cookie = request.getCookies();
 		
 		HttpSession session = request.getSession();
-		// session.removeAttribute("login_name"); // 세션 객체에 생성된 데이터 삭제
-		session.invalidate(); // 세션 객체 만료
-		
-		for(Cookie c: cookie){
-			if(c.getName().equals("login_name")) {
-				c.setMaxAge(0); // 만료시간을 0으로 설정하여 제거하도록 한다.
-				response.addCookie(c);
-				response.sendRedirect("/");
-			}
+		if(session.getAttribute("logined") != null) {
+			session.invalidate(); // 세션 객체 만료			
+		} else {
+			session.setAttribute("error", "url_path");
+			response.sendRedirect(request.getContextPath() + "/error");
 		}
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 	}
 
 }

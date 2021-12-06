@@ -9,75 +9,166 @@ import oracle.jdbc.pool.OracleDataSource;
 
 public class OracleCloudConnect {
 	private final String DB_URL = "jdbc:oracle:thin:@mydb_medium?TNS_ADMIN=C:/Program Files/Wallet_myDB";
+	private String url = "";
 	private Properties info = new Properties();
-	private OracleDataSource ods = null;
 	private OracleConnection conn = null;
-	private Statement stat = null;
+	private PreparedStatement pstat = null;
 
-	// 초기화 블럭
-	{
-		// 사용자 홈 디렉터리 경로를 알아낸다.
+	public OracleCloudConnect() {
+		this(false);
+	}
+	
+	public OracleCloudConnect(boolean wallet) {
 		String userHome = System.getProperty("user.home");
+		
 		try {
 			info.load(new FileReader(userHome + "/oracle_connection.prop"));
 		} catch (FileNotFoundException e) {
-			System.out.println("oracle_connection.prop 파일을 찾을 수 없습니다.");
-			System.out.println("기본 연결 계정을 사용합니다.");
-			info.setProperty("user", "user");
-			info.setProperty("password", "password");
+			System.err.println("oracle_connection.prop 파일을 찾을 수 없습니다.");
+			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if(wallet) {
+			url = "jdbc:oracle:thin:@mydb_medium?TNS_ADMIN=C:/Program Files/Wallet_myDB";
+			this.walletConnect();
+		} else {
+			url = "jdbc:oracle:thic:@localhost:1521:xe";
+			this.connect();
+		}
+	}
+	
+	private void connect() {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			this.conn = (OracleConnection) DriverManager.getConnection(
+					this.url,
+					this.info.getProperty("user"),
+					this.info.getProperty("password"));
+			this.connectSetting();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void walletConnect() {
+		try {
+			OracleDataSource ods = new OracleDataSource();
+			ods.setURL(this.url);
+			ods.setConnectionProperties(this.info);
+			this.conn = (OracleConnection) ods.getConnection();
+			this.connectSetting();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void connectSetting() {
+		try {
+			this.conn.setAutoCommit(false);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public ResultSet select(String query) {
+		ResultSet rs = null;
+		try {
+			Statement stat = this.conn.createStatement();
+			rs = stat.executeQuery(query);
+			stat.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	public ResultSet select(PreparedStatement ps) {
+		ResultSet rs = null;
+		try {
+			rs = ps.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	public PreparedStatement getPstat(String query) {
+		try {
+			this.pstat = this.conn.prepareStatement(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return this.pstat;
+	}
+	
+	public int insert(String query) {
+		int rs = 0;
+		try {
+			Statement stat = this.conn.createStatement();
+			rs = stat.executeUpdate(query);
+			stat.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	public int insert(PreparedStatement ps) {
+		int rs = 0;
+		try {
+			rs = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	public int update(PreparedStatement ps) {
+		return this.update(ps);
+	}
+	
+	public int update(String query) {
+		return this.update(query);
+	}
+	
+	public int delete(String query) {
+		return this.insert(query);
+	}
+	
+	public int delete(PreparedStatement ps) {
+		return this.delete(ps);
+	}
+	
+	public void commit() {
+		try {
+			this.conn.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void rollback() {
+		try {
+			this.conn.rollback();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void close() {
+		try {
+			if(this.pstat != null) {
+				this.pstat.close();
+			}
+			this.conn.close();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public OracleCloudConnect() throws SQLException {
-		// OracleDatabase에 접속하기 위한 설정
-		this.ods = new OracleDataSource();
-		this.ods.setURL(DB_URL);
-		this.ods.setConnectionProperties(this.info);
-	}
-
-	public void connection() throws SQLException {
-		// OracleDatabase에 접속
-		this.conn = (OracleConnection) ods.getConnection();
-		this.conn.setAutoCommit(false);
-	}
-
-	public ResultSet sendQuery(String query) throws SQLException {
-		// OracleDatabase에 접속 후 Query 전송
-		this.stat = this.conn.createStatement();
-		return this.stat.executeQuery(query);	// 실행 결과로 ResultSet을 받아온다.;
-	}
-
-	public int insertQuery(String query) throws SQLException {
-		this.stat = this.conn.createStatement();
-		return this.stat.executeUpdate(query);
-	}
 	
-	public int updateQuery(String query) throws SQLException {
-		return this.insertQuery(query);
-	}
-
-	public int deleteQuery(String query) throws SQLException {
-		return this.insertQuery(query);
-	}
-
-	public void close() throws SQLException {
-		// 모든 작업을 완료 후에는 자원을 반납 하기위해 close();
-		this.stat.close();
-	}
-
-	public void connectionClose() throws SQLException {
-		// 모든 작업을 완료한 후에는 연결을 끊기 위해 close();
-		this.conn.close();
-	}
-
-	public void commit() throws SQLException {
-		this.conn.commit();
-	}
-
-	public void rollback() throws SQLException {
-		this.conn.rollback();
-	}
-
 }

@@ -1,73 +1,70 @@
 package com.web.board.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class BoardDTO {
-	private int board_num;
-	private String board_writer;
-	private String board_title;
-	private String board_content;
-	private Date date;
-	
-	
-	public BoardDTO() {
-
+	private int id;
+	private String title;
+	private String writer;
+	private String content;
+	private Date createDate;
+	private Date createDate;
+	private int viewCount;
+	private int goodCount;
+	private int bac_count;
+	public int getId() {
+		return id;
 	}
-	
-	public BoardDTO(String board_writer, String board_title, String board_content) {
-		this.board_writer = board_writer;
-		this.board_title = board_title;
-		this.board_content = board_content;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public BoardDTO(int board_num, String board_writer, String board_title, String board_content) {
-		this.board_num = board_num;
-		this.board_writer = board_writer;
-		this.board_title = board_title;
-		this.board_content = board_content;
+	public String getTitle() {
+		return title;
 	}
-	
-	public BoardDTO(int board_num, String board_writer, String board_title, String board_content, Date date) {
-		this.board_num = board_num;
-		this.board_writer = board_writer;
-		this.board_title = board_title;
-		this.board_content = board_content;
-		this.date = date;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-
-	public void setNum(String num) {
-	  	this.board_num = Integer.parseInt(num);
-    }
-
-	public int getBoard_num() {
-		return board_num;
+	public String getWriter() {
+		return writer;
 	}
-	public void setBoard_num(int board_num) {
-		this.board_num = board_num;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
-	public String getBoard_writer() {
-		return board_writer;
+	public String getContent() {
+		return content;
 	}
-	public void setBoard_writer(String board_writer) {
-		this.board_writer = board_writer;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public String getBoard_title() {
-		return board_title;
+	public Date getCreateDate() {
+		return createDate;
 	}
-	public void setBoard_title(String board_title) {
-		this.board_title = board_title;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
-	public String getBoard_content() {
-		return board_content;
+	public Date getCreateDate() {
+		return createDate;
 	}
-	public void setBoard_content(String board_content) {
-		this.board_content = board_content;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
-	public Date getDate() {
-		return date;
+	public int getViewCount() {
+		return viewCount;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
 	}
-	
+	public int getGoodCount() {
+		return goodCount;
+	}
+	public void setGoodCount(int goodCount) {
+		this.goodCount = goodCount;
+	}
+	public int getBac_count() {
+		return bac_count;
+	}
+	public void setBac_count(int bac_count) {
+		this.bac_count = bac_count;
+	}
 	
 }

@@ -1,6 +1,8 @@
 package com.web.account.model;
 
-import java.sql.SQLException;
+import java.util.regex.*;
+import java.security.*;
+
 public class AccountService {
 
     private AccountDTO dto;
@@ -9,7 +11,7 @@ public class AccountService {
         this.dto = dto;
     }
 
-    public boolean join() throws SQLException {
+    public boolean join() {
     	if(this.dto == null) {
     		return false;
     	}
@@ -19,6 +21,60 @@ public class AccountService {
     	if(res == 1) {
     		return true;
     	}
+    	return false;
+    }
+    
+    public int login() {
+    	AccountDAO dao = new AccountDAO();
+    	AccountDTO data = null;
+
+    	// 계정 존재 유무 확인
+    	if(isExisted()) {
+    		if(checkPassword()) {
+    			// 로그인 시간 업데이트
+    			dao.updateLoginDate(this.dto);
+
+    			// 계정 정보 불러오기
+    			data = dao.findAccount(this.dto.getUsername());
+
+    			// 계정 정보를 DTO 에 담기
+    			dto.setId(data.getId());
+    			dto.setPassword(null);
+    			dto.setEmail(data.getEmail());
+    			dto.setJoinDate(data.getJoinDate());
+    			dto.setLoginDate(data.getLoginDate());
+
+    			dao.commit();
+    			dao.close();
+    			return 0;
+    		}
+    		return -2;
+    	}
+    	return -1;
+    }
+
+    private boolean isExisted() {
+    	AccountDAO dao = new AccountDAO();
+    	int res = dao.countAccount(this.dto);
+    	dao.close();
+
+    	return res == 1 ? true : false;
+    }
+
+    private boolean checkPassword() {
+    	AccountDAO dao = new AccountDAO();
+    	AccountDTO data = dao.findAccount(dto.getUsername());
+    	dao.close();
+
+    	String dbasePass = data.getPassword();
+    	String inputPass = this.dto.getPassword();
+
+    	return dbasePass.equals(inputPass);
+    }
+    
+    // 회원정보 변경
+    public boolean change() {
+
     	return false;
     }
     
@@ -35,52 +91,14 @@ public class AccountService {
     }
 
     private boolean usernameValid() {
-    	boolean isUsernameValid = true;
-    	if(this.dto.getUsername().length() >= 4
-    		    && this.dto.getUsername().length() <= 16) {
-            for(int i = 0; i < this.dto.getUsername().length(); i++) {
-                System.out.println(isUsernameValid);
-                if(this.dto.getUsername().charAt(i) >= 'a' && this.dto.getUsername().charAt(i) <= 'z') {
-                    isUsernameValid = true;
-                } else if(this.dto.getUsername().charAt(i) >= '0' && this.dto.getUsername().charAt(i) <= '9') {
-                    isUsernameValid = true;
-                } else if(this.dto.getUsername().charAt(i) == '_') {
-                    isUsernameValid = true;
-                } else {
-                    isUsernameValid = false;
-                }
-                System.out.println(isUsernameValid + "|" + this.dto.getUsername().charAt(i));
-                if(!isUsernameValid) {
-                    break;
-                }
-            }
-            return isUsernameValid;
-        }
-        return false;
+    	String regex = "^[A-Za-z0-9]{4,12}$";
+    	boolean res = Pattern.matches(regex, this.dto.getUsername());
+        return res;
     }
 
     private boolean passwordValid() {
-    	boolean isPasswordValid = true;
-    	if(this.dto.getPassword().length() >= 4
-    		    && this.dto.getPassword().length() <= 16) {
-            for(int i = 0; i < this.dto.getPassword().length(); i++) {
-                System.out.println(isPasswordValid);
-                if(this.dto.getPassword().charAt(i) >= 'a' && this.dto.getPassword().charAt(i) <= 'z') {
-                	isPasswordValid = true;
-                } else if(this.dto.getPassword().charAt(i) >= '0' && this.dto.getPassword().charAt(i) <= '9') {
-                	isPasswordValid = true;
-                } else if(this.dto.getPassword().charAt(i) == '_') {
-                	isPasswordValid = true;
-                } else {
-                	isPasswordValid = false;
-                }
-                System.out.println(isPasswordValid + "|" + this.dto.getPassword().charAt(i));
-                if(!isPasswordValid) {
-                    break;
-                }
-            }
-            return isPasswordValid;
-        }
-        return false;
+    	String regex = "^[A-Za-z0-9]{4,12}$";
+    	boolean res = Pattern.matches(regex, this.dto.getPassword());
+        return res;
     }
 }

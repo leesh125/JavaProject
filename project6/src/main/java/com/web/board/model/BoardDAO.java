@@ -1,6 +1,7 @@
 package com.web.board.model;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.jspweb.dbconn.OracleCloudConnect;
 import com.web.guestbook.model.GuestBookDTO;
@@ -47,4 +48,8 @@ public class BoardDAO {
 			e.printStackTrace();
 		}
     }
+	public List<BoardDTO> selectAll() {
+		String query = "SELECT * FROM BOARDS ORDER BY ID DESC";
+		return null;
+	}
 }
