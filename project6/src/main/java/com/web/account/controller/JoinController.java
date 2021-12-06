@@ -24,15 +24,15 @@ public class JoinController extends HttpServlet {
 			throws ServletException, IOException {
 		String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String email = request.getParameter("email");
         
-        AccountDTO dto = new AccountDTO(username, password);
+        AccountDTO dto = new AccountDTO(username, password, email);
         AccountService service = new AccountService(dto);
         
         boolean isRedirect = false;
         
         if(service.isValid()) {
             if(service.join()) {
-                response.sendRedirect("/login");
                 isRedirect = true;
             } else {
             	request.setAttribute("error", "가입 처리중 예상치 못한 문제가 발생하였습니다.");

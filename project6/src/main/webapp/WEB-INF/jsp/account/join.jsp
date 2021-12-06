@@ -1,14 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.web.account.model.*" %>
+<%@ page import="javax.servlet.http.HttpSession"
+		import="com.web.account.model.*" %>
 <%
 	boolean isError = false;
+	boolean logined = false;
 	String errMsg = "";
-	AccountDTO dto = new AccountDTO();
+	
+	AccountDTO dto = new AccountDTO("", "", "");
+	
 	if(request.getAttribute("error") != null) {
 		isError = true;
 		errMsg = (String) request.getAttribute("error");
 		dto = (AccountDTO) request.getAttribute("account_data");
+	} else if (session.getAttribute("logined") != null) {
+		logined = (boolean) session.getAttribute("logined");
+		dto = (AccountDTO) session.getAttribute("account_data");
 	}
 %>
 <!DOCTYPE html>
@@ -16,9 +23,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>회원 가입 폼</title>
+	<jsp:include page="/WEB-INF/jsp/include/head1.jsp" flush="false" />
 	<script type="text/javascript" src="/static/js/join.js"></script>
 </head>
 <body>
+	<header>
+		<jsp:include page="/WEB-INF/jsp/module/top-navigation.jsp" flush="false" >
+			<jsp:param name="logined" value="<%=logined %>" />
+		</jsp:include>
+	</header>
 	<form action="./join" method="post">
 		<div>
 			<input type="text" name="username" value="<%=dto.getUsername() %>" placeholder="아이디" required>
@@ -37,5 +50,6 @@
 			<button type="submit">가입</button>
 		</div>
 	</form>
+	
 </body>
 </html>

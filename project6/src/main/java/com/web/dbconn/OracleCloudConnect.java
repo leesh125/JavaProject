@@ -1,4 +1,4 @@
-package com.jspweb.dbconn;
+package com.web.dbconn;
 
 import java.io.*;
 import java.sql.*;
@@ -132,7 +132,7 @@ public class OracleCloudConnect {
 	}
 	
 	public int update(String query) {
-		return this.update(query);
+		return this.insert(query);
 	}
 	
 	public int delete(String query) {

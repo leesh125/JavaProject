@@ -1,6 +1,7 @@
 package com.web.bookmark.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -22,7 +23,12 @@ public class BookMarkController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BookMarkService service = new BookMarkService();
 		
-		request.setAttribute("datas", service.getList());
+		try {
+			request.setAttribute("datas", service.getList());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		String view = "/WEB-INF/jsp/bookmark/index.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(view);
@@ -42,16 +48,27 @@ public class BookMarkController extends HttpServlet {
 		BookMarkDTO dto = new BookMarkDTO(nickname,url);
 		BookMarkService service = new BookMarkService();
 		
-		if(service.add(dto)) {
-			response.sendRedirect("/bookmark");
-		} else {
-			request.setAttribute("init", dto);
-			request.setAttribute("datas", service.getList());
-			String view = "/WEB-INF/jsp/bookmark/index.jsp";
-			RequestDispatcher rd = request.getRequestDispatcher(view);
-			rd.forward(request, response);
+		try {
+			if(service.add(dto)) {
+				response.sendRedirect("/bookmark");
+			} else {
+				request.setAttribute("init", dto);
+				request.setAttribute("datas", service.getList());
+				String view = "/WEB-INF/jsp/bookmark/index.jsp";
+				RequestDispatcher rd = request.getRequestDispatcher(view);
+				rd.forward(request, response);
 
-    		System.out.println("asdasd");
+				System.out.println("asdasd");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}

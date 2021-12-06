@@ -5,51 +5,59 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jspweb.dbconn.OracleCloudConnect;
+import com.web.dbconn.OracleCloudConnect;
 
 public class BookMarkDAO {
-	OracleCloudConnect occ = null;
+	private OracleCloudConnect occ;
 	
-	public BookMarkDAO() throws SQLException {
-        this.occ = new OracleCloudConnect();
-        this.occ.connection();
-    }
+	public BookMarkDAO() {
+		this.occ = new OracleCloudConnect(true);
+	}
 	
-	public List<BookMarkDTO> select() throws SQLException {
+	public List<BookMarkDTO> select() {
 		List<BookMarkDTO> datas = new ArrayList<BookMarkDTO>();
-		String query = "SELECT * FROM BOOKMARK";
-		ResultSet res = occ.sendQuery(query);
-		while(res.next()) {
-			BookMarkDTO dto = new BookMarkDTO();
-			dto.setNickname(res.getString("b_nickname"));
-			dto.setUrl(res.getString("b_url"));
-			datas.add(dto);
-		}
 		
-		res.close();
-		occ.close();
+		String query = "SELECT * FROM BOOKMARK ORDER BY B_ID";
+		ResultSet res;
+		try {
+			res = occ.select(query);
+			while(res.next()) {
+				BookMarkDTO dto = new BookMarkDTO();
+				dto.setNickname(res.getString("B_NAME"));
+				dto.setUrl(res.getString("B_URL"));
+				datas.add(dto);
+			}
+			res.close();
+			occ.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		return datas;
 	}
 	
-	public boolean insert(BookMarkDTO dto) throws SQLException {
+	public boolean insert(BookMarkDTO dto) {
 		String query = "INSERT INTO BOOKMARK VALUES("
+				+ "BOOKMARK_SEQ.NEXTVAL, "
 				+ "'" + dto.getNickname() + "', "
-				+ "'" + dto.getUrl() + "'"
-				+ ")";
-		int res = occ.insertQuery(query);
-		if(res == 1) {
-			return true;
-		}
-		return false;
+				+ "'" + dto.getUrl() + "')";
 		
+		int res = 0;
+		res = occ.insert(query);
+		occ.close();
+		
+		return res == 1 ? true : false;
 	}
 	
-	public void commit() throws SQLException {
-    	occ.commit();
-    }
-
-    public void rollback() throws SQLException {
-    	occ.rollback();
-    }
+	public void commit() {
+		occ.commit();
+	}
+	
+	public void rollback() {
+		occ.rollback();
+	}
+	
+	public void close() {
+		occ.close();
+	}
 }

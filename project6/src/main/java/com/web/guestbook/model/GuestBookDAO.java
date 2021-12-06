@@ -5,18 +5,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jspweb.dbconn.OracleCloudConnect;
+import com.web.dbconn.OracleCloudConnect;
 
 public class GuestBookDAO {
 	OracleCloudConnect occ = null;
 	
 	public GuestBookDAO() {
-        try {
-			this.occ = new OracleCloudConnect();
-			this.occ.connection();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		this.occ = new OracleCloudConnect(true);
     }
 	
 	public List<GuestBookDTO> select() {
@@ -24,7 +19,7 @@ public class GuestBookDAO {
 		String query = "SELECT * FROM GUESTBOOK ORDER BY G_DATE DESC";
 		ResultSet res;
 		try {
-			res = occ.sendQuery(query);
+			res = occ.select(query);
 			while(res.next()) {
 				GuestBookDTO dto = new GuestBookDTO();
 				dto.setId(res.getString("g_id"));
@@ -49,7 +44,7 @@ public class GuestBookDAO {
     			+ " WHERE G_ID = " + id;
 
     	try {
-			ResultSet res = occ.sendQuery(query);
+			ResultSet res = occ.select(query);
 			res.next();
 			dto.setResultSet(res);
 		} catch (SQLException e) {
@@ -67,13 +62,8 @@ public class GuestBookDAO {
 				+ "SYSDATE"
 				+ ")";
 		int res = 0;        
-		try {
-			res = occ.insertQuery(query);
-			occ.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		res = occ.insert(query);
+		occ.close();
 		return res == 1 ? true : false;
     }
 	
@@ -85,12 +75,8 @@ public class GuestBookDAO {
     			+ "  WHERE G_ID = " + dto.getId() + "";
     	
     	int res = 0;
-    	try {
-			res = occ.updateQuery(query);
-			occ.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+    	res = occ.update(query);
+		occ.close();
     	return res == 1 ? true : false;
     }
 
@@ -99,35 +85,19 @@ public class GuestBookDAO {
     			+ " WHERE G_ID = " + dto.getId() + "";
 
     	int res = 0;
-    	try {
-			res = occ.deleteQuery(query);
-			occ.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+    	res = occ.delete(query);
+		occ.close();
     	return res == 1 ? true : false;
     }
 
     public void commit() {
-        try {
-			occ.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+        occ.commit();
     }
 
     public void rollback() {
-        try {
-			occ.rollback();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+        occ.rollback();
     }
     public void close() {
-    	try {
-			occ.connectionClose();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+    	occ.close();
     }
 }

@@ -1,21 +1,24 @@
 package com.web.account.model;
 
-import com.jspweb.dbconn.*;
 import java.sql.*;
 
-public class AccountDAO {
-    OracleCloudConnect occ = null;
+import com.web.dbconn.*;
 
+public class AccountDAO {
+    private OracleCloudConnect occ = null;
+    private final String DB = "ACCOUNTS";
+    
     public AccountDAO() {
         this.occ = new OracleCloudConnect(true);
     }
-
+    
+    // 테이블에 데이터 추가
     public int createAccount(AccountDTO dto) {
-        int res = 0;
+    	int res = 0;
     	String q = "INSERT INTO ACCOUNTS VALUES("
-        		+ "ACCOUNTS_SEQ.NEXTVAL, ?, ?)";
-        PreparedStatement st = occ.getPstat(q);  
-        try {
+    			+ "ACCOUNTS_SEQ.NEXTVAL, ?, ?)";
+    	PreparedStatement st = occ.getPstat(q);
+    	try {
 			st.setString(1, dto.getUsername());
 			st.setString(2, dto.getPassword());
 			res = occ.insert(st);
@@ -25,16 +28,18 @@ public class AccountDAO {
 		}
         return res;
     }
-
+    
+    // 테이블에서 데이터 검색(계정명으로)
     public AccountDTO findAccount(String username) {
     	AccountDTO res = null;
-
+    	
     	String query = "SELECT * FROM ACCOUNTS"
     			+ " WHERE USERNAME = ?";
+    	
     	PreparedStatement st = occ.getPstat(query);
     	try {
-    		st.setString(1, username);
-    		ResultSet rs = occ.select(st);
+			st.setString(1, username);
+			ResultSet rs = occ.select(st);
 			if(rs.next()) {
 				res = new AccountDTO();
 				res.setId(rs.getInt("ID"));
@@ -44,13 +49,14 @@ public class AccountDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+    	
     	return res;
     }
     
+    // 테이블에서 데이터 검색(식별값으로)
     public AccountDTO findAccount(int id) {
     	AccountDTO res = null;
-
+    	
     	String query = "SELECT * FROM ACCOUNTS"
     			+ " WHERE ID = ?";
     	
@@ -67,20 +73,24 @@ public class AccountDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+    	
     	return res;
     }
+    
     public int countAccount(AccountDTO dto) {
     	int res = 0;
     	
     	String query = "SELECT COUNT(*) FROM " + DB
-    			+ " WHERE USERNAME = " + dto.getUsername();
-    	
-    	ResultSet rs = occ.select(query);
+    			+ " WHERE USERNAME = ?";
+    	PreparedStatement st = occ.getPstat(query);
     	try {
+			st.setString(1, dto.getUsername());
+			ResultSet rs = occ.select(st);
 			if(rs.next()) {
-				res = rs.getInt(0);
+				res = rs.getInt(1);
 			}
+			rs.close();
+			st.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -123,26 +133,17 @@ public class AccountDAO {
     	
     	return res;
     }
-    public int removeAccount(AccountDTO dto) {
-    	int res = 0;
-
-    	String query = "DELETE FROM ACCOUNTS"
-    			+ " WHERE USERNAME = '" + dto.getUsername() + "'"
-    			+ " AND ID = " + dto.getId();
-    	res = occ.delete(query);
-
-    	return res;
-    }
-
+    
     public void commit() {
     	occ.commit();
     }
-
+    
     public void rollback() {
     	occ.rollback();
     }
-
+    
     public void close() {
     	occ.close();
     }
+
 }

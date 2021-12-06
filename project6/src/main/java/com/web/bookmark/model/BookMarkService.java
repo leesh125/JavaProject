@@ -6,33 +6,24 @@ import java.util.List;
 import com.web.guestbook.model.GuestBookDTO;
 
 public class BookMarkService {
-	public boolean add(BookMarkDTO dto) {
+	public boolean add(BookMarkDTO dto) throws SQLException {
 		boolean res = false;
-		try {
-			BookMarkDAO dao = new BookMarkDAO();
-			res = dao.insert(dto);
-			if(res) {
-				dao.commit();
-				return true;
-			} else {
-				dao.rollback();
-				return false;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		BookMarkDAO dao = new BookMarkDAO();
+		res = dao.insert(dto);
+		if(res) {
+			dao.commit();
+			return true;
+		} else {
+			dao.rollback();
+			return false;
 		}
-		return false;
 	}
 	
-	public List<BookMarkDTO> getList() {
+	public List<BookMarkDTO> getList() throws SQLException {
 		BookMarkDAO dao = null;
 		List<BookMarkDTO> datas = null;
-		try {
-			dao = new BookMarkDAO();
-			datas = dao.select();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		dao = new BookMarkDAO();
+		datas = dao.select();
 		
 		return datas;
 	}
