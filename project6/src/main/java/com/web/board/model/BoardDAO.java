@@ -24,15 +24,7 @@ public class BoardDAO {
 			ResultSet rs = occ.select(st);
 			while(rs.next()) {
 				BoardDTO data = new BoardDTO();
-				data.setId(rs.getInt("ID"));
-				data.setTitle(rs.getString("TITLE"));
-				data.setWriter(rs.getString("WRITER"));
-				data.setContent(rs.getString("CONTENT"));
-				data.setCreateDate(rs.getDate("CREATE_DATE"));
-				data.setUpdateDate(rs.getDate("UPDATE_DATE"));
-				data.setViewCount(rs.getInt("VIEW_COUNT"));
-				data.setGoodCount(rs.getInt("GOOD_COUNT"));
-				data.setBadCount(rs.getInt("BAD_COUNT"));
+				data.setResultSet(rs);
 				datas.add(data);
 			}
 			rs.close();
@@ -41,6 +33,29 @@ public class BoardDAO {
 			e.printStackTrace();
 		}
 
+		return datas;
+	}
+	
+	public List<BoardDTO> selectCategoryType(int type) {
+		List<BoardDTO> datas = new ArrayList<BoardDTO>();
+		String query = "SELECT * FROM BOARDS"
+				+ " WHERE CID = ?"
+				+ " ORDER BY CREATE_DATE, ID";
+		try {
+			PreparedStatement st = occ.getPstat(query);
+			st.setInt(1, type);
+			ResultSet rs = occ.select(st);
+			while(rs.next()) {
+				BoardDTO data = new BoardDTO();
+				data.setResultSet(rs);
+				datas.add(data);
+			}
+			rs.close();
+			st.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return datas;
 	}
 	

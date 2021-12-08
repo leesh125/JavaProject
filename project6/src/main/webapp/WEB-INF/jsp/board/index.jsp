@@ -49,9 +49,62 @@
 		</ul>
 	</div>
 	
+	<div>
+		<table class="table table-hover table-striped">
+			<colgroup>
+				<col class="col-1">
+				<col class="col-4">
+				<col class="col-2">
+				<col class="col-2">
+				<col class="col-1">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="data" items="${datas}">
+					<c:url var="detail_url" value="/board/detail">
+						<c:param name="id" value="${data.getId()}" />
+					</c:url>	
+					<tr onclick="location.href='${detail_url}'" style="cursor:pointer;">
+						<td class="text-end">${data.getId()}</td>
+						<td>${data.getTitle()}</td>
+						<td>${data.getWriter()}</td>
+						<td><fmt:formatDate value="${data.getCreateDate()}" pattern="YYYY/MM/DD" /></td>
+						<td><fmt:formatNumber value="${data.getViewCount()}" type="number" /></td>
+					</tr>
+				</c:forEach>
+				<%-- <% List<BoardDTO> datas = (List<BoardDTO>) request.getAttribute("datas"); %>
+				<% for(BoardDTO data: datas) { %>
+					<tr onclick="location.href='/board/detail?id=<%=data.getId() %>'">
+						<th><%=data.getId() %></th>
+						<th><%=data.getTitle() %></th>
+						<th><%=data.getWriter() %></th>
+						<th><%=data.getCreateDate() %></th>
+						<th><%=data.getViewCount() %></th>
+					</tr>
+				<% } %> --%>
+			</tbody>
+		</table>
+		<div>
+			<c:url var="search_url" value="/board" />
+			<form action="${search_url}">
+				<div class="input-group w-25">
+					<input class="form-control" type="text" name="search" placeholder="제목">
+					<button class="btn btn-outline-dark" type="submit">검색</button>
+				</div>
+			</form>
+		</div>
+	</div>
 	
 	<ul>
-		<c:forEach var="i" begin="0" end="9" step="1" varStatus="l">
+		<c:forEach var="i" begin="0" end="3" step="1" varStatus="l">
 			<c:if test="${l.first}"><li>반복 시작!</li></c:if>
 			<li>${i} 번째 반복</li>
 			<c:if test="${l.last}"><li>반복 끝!</li></c:if>		
@@ -91,10 +144,10 @@
 	%>
 	
 	<%-- 표현언어로 객체를 사용할 수 있다. --%>
-	${data}
+	${list}
 	<%-- scope를 생략하면 기본 pageScope 이다.
 		 c:set 에 객체를 담을 수 있다. --%>
-	<c:set var="d" value="${data}" />
+	<c:set var="d" value="${datas}" />
 	<br>
 	${d.get(0)} | ${d.get(1)} | ${d.get(2)}
 	<br>
@@ -111,9 +164,9 @@
 		<c:otherwise>모든 조건이 거짓일 때 실행</c:otherwise>
 	</c:choose>
 	
-	<div>
+	<div class="text-end">
 		<c:url var="add_url" value="/board/add" />
-		<button type="button" onclick="location.href='${add_url}">글쓰기</button>
+		<button type="button" class="btn btn-outline-dark btn-sm" onclick="location.href='${add_url}'">글쓰기</button>
 	</div>
 	
 	<ul>
@@ -172,7 +225,7 @@
 	  <fmt:formatDate value="${now}" type="both" dateStyle="full" timeStyle="full" timeZone="Asia/Tokyo"/><br>
 	  <fmt:formatDate value="${now}" type="both" dateStyle="full" timeStyle="full" timeZone="Europe/London"/><br>
 	  
-	  
+	 <hr>
 	<c:set var="txt1" value="Hello JSTL" />
 	<c:set var="txt2" value="JSTL 태그 라이브러리" />
 	문자열 길이 fn:length() -> ${fn:length(txt1)}<br>
@@ -188,44 +241,7 @@
 	<c:forEach var="t" items="${fn:split(txt2, ' ')}">
 		<span>${t}</span>
 	</c:forEach>
-	<c:set var="arr1" value="${fn:split(txt2, ' '}" />
+	<c:set var="arr1" value="${fn:split(txt2, ' ')}" />
 	${fn:join(arr1,"-")}
-	<div>
-		<table>
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:url var="detail_url" value="/board/detail">
-					<c:param name="id" value="${data.getId()}" />
-				</c:url>	
-				<c:forEach var="data" items="${datas}">
-					<tr onclick="location.href='${detail_url}'">
-						<td>${data.getId()}</td>
-						<td>${data.getTitle()}</td>
-						<td>${data.getWriter()}</td>
-						<td><fmt:formatDate value="${data.getCreateDate()}" pattern="YYYY/MM/DD" /></td>
-						<td><fmt:formatNumber value="${data.getViewCount()}" type="number" /></td>
-					</tr>
-				</c:forEach>
-				<%-- <% List<BoardDTO> datas = (List<BoardDTO>) request.getAttribute("datas"); %>
-				<% for(BoardDTO data: datas) { %>
-					<tr onclick="location.href='/board/detail?id=<%=data.getId() %>'">
-						<th><%=data.getId() %></th>
-						<th><%=data.getTitle() %></th>
-						<th><%=data.getWriter() %></th>
-						<th><%=data.getCreateDate() %></th>
-						<th><%=data.getViewCount() %></th>
-					</tr>
-				<% } %> --%>
-			</tbody>
-		</table>
-	</div>
 </body>
 </html>
