@@ -19,7 +19,12 @@ public class LoginController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher(view).forward(request, response);
+		HttpSession session = request.getSession();
+		if(session.getAttribute("logined") != null ) {
+			response.sendRedirect(request.getContextPath() + "/error?code=100001");
+		}else {
+			request.getRequestDispatcher(view).forward(request, response);			
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"
+		import="java.sql.Date"
 		import="com.web.board.model.*" %>
 <%-- core 라이브러리 : 변수 설정, 제어문, 반복문 처리와 관연된 기능 지능 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9,7 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%-- function 라이브러리 : 문자열 처리와 관련된 함수 기능 제공 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +42,7 @@
 		<ul class="nav nav-tabs nav-pills">
 			<c:forEach var="cat" items="${category}">
 				<li class="nav-item">
-					<a class="nav-link ${type eq cat.getId() ? 'active' : '' }"
+					<a class="nav-link ${param.type eq cat.getId() ? 'active' : '' }"
 						href="/board?type=${cat.getId()}">${cat.getName()}게시판</a>
 				</li>
 			</c:forEach>
@@ -111,8 +112,84 @@
 	</c:choose>
 	
 	<div>
-		<button type="button" onclick="location.href='/board/add'">글쓰기</button>
+		<c:url var="add_url" value="/board/add" />
+		<button type="button" onclick="location.href='${add_url}">글쓰기</button>
 	</div>
+	
+	<ul>
+		<c:set var="str" value="a, b, c, d, e, f" />
+		<c:forTokens var="s" items="${str}" delims=",">
+			<li>${s}</li>
+		</c:forTokens>
+	</ul>
+	<%--
+		value: 변환할 값
+		var: 변환된 값이 저장될 변수
+		type: 추력될 타입(percent:%, number, currency:통화형식)
+		currencySymbol: 통화 타입일 때 출력할 통화 문자(＄, ￦, ￡)
+		groupingUsed: 콤마들의 기호로 단위 구분을 나타내도록 함, true(기본값)면 콤마 구분을 함.
+	 --%>
+	 <fmt:formatNumber value="10" type="number" var="x"  />
+	 ${x}%
+	 
+	 <%--
+	 	value: 포맷 변환할 날짜 데이터
+	 	type: 날짜(date), 시간(time), 날짜/시간(both) 변환인지를 구분
+	 	dateStyle: 날짜 출력 형식을 지정(full, long, medium, short)
+	 	timeStyle: 시간 출력 형식을 지정(자바 클래스 DateFormat에 정의된 형식을 사용)
+	 	pattern: 직접 출력 형식을 지정(자바 클래스 SimpleDateFormat에 지정된 패턴을 사용)
+	 	timeZone: 특정 나라의 시간대로 설정 
+	 	
+	 	<fmt:formatDate value="" type="" dateStyle="" timeStyle="" pattern="" timeZone=""/>
+	  --%>
+	  
+	  <c:set var="now" value="<%=java.sql.Date.valueOf(\"2021-12-08\") %>" />
+	  ${now}<br>
+	  ----------------------Style: full-----------------<br>
+	  <fmt:formatDate value="${now}" type="date" dateStyle="full"/><br>
+	  <fmt:formatDate value="${now}" type="time" dateStyle="full"/><br>
+	  <fmt:formatDate value="${now}" type="both" dateStyle="full" timeStyle="full"/><br>
+	  ----------------------Style: long-----------------<br>
+	  <fmt:formatDate value="${now}" type="date" dateStyle="long"/><br>
+	  <fmt:formatDate value="${now}" type="time" dateStyle="long"/><br>
+	  <fmt:formatDate value="${now}" type="both" dateStyle="long" timeStyle="long"/><br>
+	  ----------------------Style: medium-----------------<br>
+	  <fmt:formatDate value="${now}" type="date" dateStyle="medium"/><br>
+	  <fmt:formatDate value="${now}" type="time" dateStyle="medium"/><br>
+	  <fmt:formatDate value="${now}" type="both" dateStyle="medium" timeStyle="medium"/><br>
+	  ----------------------Style: short-----------------<br>
+	  <fmt:formatDate value="${now}" type="date" dateStyle="short"/><br>
+	  <fmt:formatDate value="${now}" type="time" dateStyle="short"/><br>
+	  <fmt:formatDate value="${now}" type="both" dateStyle="short" timeStyle="short"/><br>
+	  ----------------------pattern-----------------<br>
+	  <fmt:formatDate value="${now}" pattern="YYYY/MM/DD EEEE"/><br>
+	  <fmt:formatDate value="${now}" pattern="hh:mm:ss E"/><br>
+	  <fmt:formatDate value="${now}" pattern="HH:mm:ss.SSS"/><br>
+	  <fmt:formatDate value="${now}" pattern="a hh:mm:ss"/><br>
+	  ----------------------timeZone-----------------<br>
+	  <fmt:formatDate value="${now}" type="both" dateStyle="full" timeStyle="full"/><br>
+	  <fmt:formatDate value="${now}" type="both" dateStyle="full" timeStyle="full" timeZone="America/New York"/><br>
+	  <fmt:formatDate value="${now}" type="both" dateStyle="full" timeStyle="full" timeZone="Asia/Tokyo"/><br>
+	  <fmt:formatDate value="${now}" type="both" dateStyle="full" timeStyle="full" timeZone="Europe/London"/><br>
+	  
+	  
+	<c:set var="txt1" value="Hello JSTL" />
+	<c:set var="txt2" value="JSTL 태그 라이브러리" />
+	문자열 길이 fn:length() -> ${fn:length(txt1)}<br>
+	문자열 길이 fn:length() -> ${fn:length(txt2)}<br>
+	대소문자 변환 fn:toUpperCase() => ${fn:toUpperCase(txt1)}<br>
+	대소문자 변환 fn:toLowerCase() => ${fn:toLowerCase(txt1)}<br>
+	문자열 자르기 fn:substring() => ${fn:substring(txt2, 5, 7)}<br>
+	공백 제거 fn:trim() => ${fn:trim(txt1)}<br>
+	문자열 바꾸기 fn:replace() => ${fn:replace(txt2, "태그", "Tag")}<br>
+	문자열 위치 찾기 fn:indexOf() => ${fn:indexOf(txt2, "태그")}<br>
+	저장할 문자열 존재 유무 fn:contains() => ${fn:contains(txt2, "태그")}<br>
+	문자열 분리 fn:split() => ${fn:split(txt2, " ")}<br>
+	<c:forEach var="t" items="${fn:split(txt2, ' ')}">
+		<span>${t}</span>
+	</c:forEach>
+	<c:set var="arr1" value="${fn:split(txt2, ' '}" />
+	${fn:join(arr1,"-")}
 	<div>
 		<table>
 			<thead>
@@ -125,13 +202,16 @@
 				</tr>
 			</thead>
 			<tbody>
+				<c:url var="detail_url" value="/board/detail">
+					<c:param name="id" value="${data.getId()}" />
+				</c:url>	
 				<c:forEach var="data" items="${datas}">
-					<tr onclick="location.href='/board/detail?id=${data.getId()}'">
+					<tr onclick="location.href='${detail_url}'">
 						<td>${data.getId()}</td>
 						<td>${data.getTitle()}</td>
 						<td>${data.getWriter()}</td>
-						<td>${data.getCreateDate()}</td>
-						<td>${data.getViewCount()}</td>
+						<td><fmt:formatDate value="${data.getCreateDate()}" pattern="YYYY/MM/DD" /></td>
+						<td><fmt:formatNumber value="${data.getViewCount()}" type="number" /></td>
 					</tr>
 				</c:forEach>
 				<%-- <% List<BoardDTO> datas = (List<BoardDTO>) request.getAttribute("datas"); %>

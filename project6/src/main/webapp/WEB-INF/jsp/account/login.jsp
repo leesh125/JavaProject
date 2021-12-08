@@ -2,6 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ page import="javax.servlet.http.HttpSession"
 		import="com.web.account.model.AccountDTO" %>
+<%-- core 라이브러리 : 변수 설정, 제어문, 반복문 처리와 관연된 기능 지능 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%--fmt 라이브러리 : 숫자ㅡ 날짜 등의 형식과 관련된 기능 제공 --%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<%-- function 라이브러리 : 문자열 처리와 관련된 함수 기능 제공 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	AccountDTO dto = new AccountDTO("", "", "");
 	boolean logined = false;
@@ -21,31 +29,22 @@
 <body>
 	<header>
 		<jsp:include page="/WEB-INF/jsp/module/top-navigation.jsp" flush="false" >
-			<jsp:param name="logined" value="<%=logined %>" />
+			<jsp:param name="logined" value="${empty sessionScope.logined ? false : true }" />
 		</jsp:include>
 	</header>
-	<form action="./login" method="post">
-		<%
-			boolean isError = false;
-			if(request.getAttribute("error") != null) {
-				isError = true;
-			}
-		%>
+	<form action="${login_url}" method="post">
 		<div>
-			<input type="text" name="username" value="<%=isError ? request.getParameter("username") : "" %>" placeholder="아이디">
+			<input type="text" name="username" value="${param.usernmae}" placeholder="아이디">
 		</div>
 		<div>
 			<input type="password" name="password" placeholder="패스워드">
 		</div>
-		<%
-			if(isError) {
-		%>
+		<c:if test="${isError}">
 			<div>
-				<label><%=(String) request.getAttribute("error") %></label>
-			</div>
-		<%
-			}
-		%>
+				<label>${error}</label>
+			</div>		
+		</c:if>
+
 		<div>
 			<button type="submit">로그인</button>
 		</div>
