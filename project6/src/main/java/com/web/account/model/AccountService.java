@@ -59,7 +59,7 @@ public class AccountService {
     	return -1;
     }
     
-    private boolean isExisted() {
+    public boolean isExisted() {
     	AccountDAO dao = new AccountDAO();
     	int res = dao.countAccount(this.dto);
     	dao.close();

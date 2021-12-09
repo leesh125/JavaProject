@@ -19,7 +19,8 @@ public class LogoutController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("logined") != null) {
-			session.invalidate(); // 세션 객체 만료			
+			session.invalidate(); // 세션 객체 만료		
+			response.sendRedirect("/");
 		} else {
 			session.setAttribute("error", "url_path");
 			response.sendRedirect(request.getContextPath() + "/error");
