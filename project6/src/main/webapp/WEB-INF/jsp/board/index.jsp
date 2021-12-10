@@ -38,48 +38,22 @@
 			<jsp:param name="logined" value="${empty sessionScope.logined ? false : true}" />
 		</jsp:include>
 	</header>
-	<div>
-		<ul class="nav nav-tabs nav-pills">
-			<c:forEach var="cat" items="${category}">
-				<li class="nav-item">
-					<a class="nav-link ${param.type eq cat.getId() ? 'active' : '' }"
-						href="/board?type=${cat.getId()}">${cat.getName()}게시판</a>
-				</li>
-			</c:forEach>
-		</ul>
-	</div>
-	
-	<div>
-		<table class="table table-hover table-striped">
-			<colgroup>
-				<col class="col-1">
-				<col class="col-4">
-				<col class="col-2">
-				<col class="col-2">
-				<col class="col-1">
-			</colgroup>
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="data" items="${datas}">
-					<c:url var="detail_url" value="/board/detail">
-						<c:param name="id" value="${data.getId()}" />
-					</c:url>	
-					<tr onclick="location.href='${detail_url}'" style="cursor:pointer;">
-						<td class="text-end">${data.getId()}</td>
-						<td>${data.getTitle()}</td>
-						<td>${data.getWriter()}</td>
-						<td><fmt:formatDate value="${data.getCreateDate()}" pattern="YYYY/MM/DD" /></td>
-						<td><fmt:formatNumber value="${data.getViewCount()}" type="number" /></td>
-					</tr>
+	<section class="container">
+		<div>
+			<ul class="nav nav-tabs nav-pills">
+				<c:forEach var="cat" items="${category}">
+					<li class="nav-item">
+						<a class="nav-link ${param.type eq cat.getId() ? 'active' : '' }"
+							href="/board?type=${cat.getId()}">${cat.getName()}게시판</a>
+					</li>
 				</c:forEach>
+			</ul>
+		</div>
+		<div class="text-end">
+			<c:url var="add_url" value="/board/add" />
+			<button type="button" class="btn btn-outline-dark btn-sm" onclick="location.href='${add_url}'">글쓰기</button>
+		</div>
+		<div>
 				<%-- <% List<BoardDTO> datas = (List<BoardDTO>) request.getAttribute("datas"); %>
 				<% for(BoardDTO data: datas) { %>
 					<tr onclick="location.href='/board/detail?id=<%=data.getId() %>'">
@@ -90,18 +64,49 @@
 						<th><%=data.getViewCount() %></th>
 					</tr>
 				<% } %> --%>
-			</tbody>
-		</table>
-		<div>
-			<c:url var="search_url" value="/board" />
-			<form action="${search_url}">
-				<div class="input-group w-25">
-					<input class="form-control" type="text" name="search" placeholder="제목">
-					<button class="btn btn-outline-dark" type="submit">검색</button>
-				</div>
-			</form>
+			<table class="table table-hover table-striped">
+				<colgroup>
+					<col class="col-1">
+					<col class="col-6">
+					<col class="col-2">
+					<col class="col-2">
+					<col class="col-1">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="data" items="${datas}">
+						<c:url var="detail_url" value="/board/detail" >
+							<c:param name="id" value="${data.getId()}" />
+						</c:url>
+						<tr onclick="location.href='${detail_url}'" style="cursor:pointer;">
+							<td class="text-end">${data.getId()}</td>
+							<td>${data.getTitle()}</td>
+							<td>${data.getWriter()}</td>
+							<td><fmt:formatDate value="${data.getCreateDate()}" pattern="YYYY년 MM월 dd일" /></td>
+							<td class="text-end"><fmt:formatNumber value="${data.getViewCount()}" type="number" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<div>
+				<c:url var="search_url" value="/board" />
+				<form action="${search_url}">
+					<div class="input-group w-25">
+						<input class="form-control" type="text" name="search" placeholder="제목">
+						<button class="btn btn-outline-dark" type="submit">검색</button>
+					</div>
+				</form>
+			</div>
 		</div>
-	</div>
+	</section>
 	
 	<ul>
 		<c:forEach var="i" begin="0" end="3" step="1" varStatus="l">

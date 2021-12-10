@@ -16,12 +16,39 @@ public class BoardDTO {
 	private int badCount;
 	private int cid;
 
+	public BoardDTO() {}
+
+	public BoardDTO(int id) {
+		this.id = id;
+	}
+
+	public BoardDTO(String title) {
+		this.title = title;
+		this.content = " ";
+	}
+
+	public BoardDTO(String bid, String title, String content) {
+		this.id = Integer.parseInt(bid);
+		this.title = title;
+		this.content = content;
+	}
+	
+	public BoardDTO(String bid, String title) {
+		this.id = Integer.parseInt(bid);
+		this.title = title;
+		this.content = " ";
+	}
+
 	public int getId() {
 		return id;
 	}
 	
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public void setId(String id) {
+		this.id = Integer.parseInt(id);
 	}
 	
 	public String getTitle() {
