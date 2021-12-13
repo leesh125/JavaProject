@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <typeAliases>
+  	<typeAlias type="com.web.account.model.AccountDTO" alias="account" />
+  </typeAliases>
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@mydb_medium?TNS_ADMIN=C:/Program Files/Wallet_myDB" />
+        <property name="username" value="webadmin"/>
+        <property name="password" value="dltkRms125!@"/>
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <mappers>
+    <mapper resource="resources/mapper/account.xml"/>
+  </mappers>
+</configuration>

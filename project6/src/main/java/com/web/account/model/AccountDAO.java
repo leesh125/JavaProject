@@ -2,14 +2,20 @@ package com.web.account.model;
 
 import java.sql.*;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.web.dbconn.*;
 
 public class AccountDAO {
     private OracleCloudConnect occ = null;
+    private MybatisConnect mc = null;
+    private SqlSession sess = null;
     private final String DB = "ACCOUNTS";
     
     public AccountDAO() {
         this.occ = new OracleCloudConnect(true);
+        this.mc = new MybatisConnect();
+        this.sess = mc.getSession();
     }
     
     // 테이블에 데이터 추가
@@ -55,26 +61,21 @@ public class AccountDAO {
     
     // 테이블에서 데이터 검색(식별값으로)
     public AccountDTO findAccount(int id) {
-    	AccountDTO res = null;
-    	
-    	String query = "SELECT * FROM ACCOUNTS"
-    			+ " WHERE ID = ?";
-    	
-    	PreparedStatement st = occ.getPstat(query);
-    	try {
-    		st.setInt(1, id);
-    		ResultSet rs = occ.select(st);
-			if(rs.next()) {
-				res = new AccountDTO();
-				res.setId(rs.getInt("ID"));
-				res.setUsername(rs.getString("USERNAME"));
-				res.setPassword(rs.getString("PASSWORD"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-    	
-    	return res;
+    	AccountDTO data = this.sess.selectOne("AccountMapper.selectAccount", id);
+    	return data;
+		/*
+		 * AccountDTO res = null;
+		 * 
+		 * String query = "SELECT * FROM ACCOUNTS" + " WHERE ID = ?";
+		 * 
+		 * PreparedStatement st = occ.getPstat(query); try { st.setInt(1, id); ResultSet
+		 * rs = occ.select(st); if(rs.next()) { res = new AccountDTO();
+		 * res.setId(rs.getInt("ID")); res.setUsername(rs.getString("USERNAME"));
+		 * res.setPassword(rs.getString("PASSWORD")); } } catch (SQLException e) {
+		 * e.printStackTrace(); }
+		 * 
+		 * return res;
+		 */
     }
     
     public int countAccount(AccountDTO dto) {
@@ -136,14 +137,17 @@ public class AccountDAO {
     
     public void commit() {
     	occ.commit();
+    	mc.commit();
     }
     
     public void rollback() {
     	occ.rollback();
+    	mc.rollback();
     }
     
     public void close() {
     	occ.close();
+    	mc.close();
     }
 
 }

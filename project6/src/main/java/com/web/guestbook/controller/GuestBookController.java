@@ -30,7 +30,6 @@ public class GuestBookController extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
         
         String id = request.getParameter("id");
         String context = request.getParameter("context");
