@@ -3,6 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+  <properties url="file:///C:/Users/leesh/oracle_connection.prop">
+  	<property name="oracleDriver" value="oracle.jdbc.driver.OracleDriver" />
+  </properties>
   <typeAliases>
   	<typeAlias type="com.web.account.model.AccountDTO" alias="account" />
   </typeAliases>
@@ -10,10 +13,10 @@
     <environment id="development">
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
-        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@mydb_medium?TNS_ADMIN=C:/Program Files/Wallet_myDB" />
-        <property name="username" value="webadmin"/>
-        <property name="password" value="dltkRms125!@"/>
+        <property name="driver" value="${oracleDriver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${user}"/>
+        <property name="password" value="${password}"/>
       </dataSource>
     </environment>
   </environments>

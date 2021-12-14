@@ -21,13 +21,39 @@
       FROM ACCOUNTS
      WHERE ID = #{id}
   </select>
-  <insert id="">
-  
+  <select id="selectAccountUsername" parameterType="String" resultMap="accountMap">
+    SELECT id as "id"
+         , username as "username"
+         , password as "password"
+         , email as "email"
+         , joindate as "joindate"
+         , logindate as "logindate"
+      FROM ACCOUNTS
+     WHERE USERNAME = #{username}
+  </select>
+  <select id="selectAccountCount" parameterType="String" resultType="_int">
+  	SELECT COUNT(*) FROM ACCOUNTS WHERE USERNAME = #{username}
+  </select>
+  <insert id="insertAccount" parameterType="account">
+  	INSERT INTO ACCOUNTS VALUES(
+  	       ACCOUNTS_SEQ.NEXTVAL
+  	     , #{username}, #{password}, #{email}
+  	     , SYSDATE, SYSDATE)
   </insert>
-  <update id="">
-  
+  <update id="updateAccount" parameterType="account">
+  	UPDATE ACCOUNTS SET
+  	       PASSWORD = #{password}
+  	     , EMAIL = #{email}
+  	 WHERE ID = #{id}
   </update>
-  <delete id ="">
-  
+  <update id="updateLoginDate" parameterType="account">
+  	UPDATE ACCOUNTS SET
+  		   LOGINDATE = SYSDATE
+     WHERE ISERNAME = #{username}
+  </update>
+  <delete id="deleteAccount" parameterType="account">
+  	DELETE FROM ACCOUNTS
+  	 WHERE USERNAME = #{username}
+  	   AND ID = #{id}
   </delete>
 </mapper>
