@@ -4,6 +4,9 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("board")
 public class BoardDTO {
 	private int id;
 	private String title;
@@ -116,7 +119,11 @@ public class BoardDTO {
 	}
 
 	public void setCid(String type) {
-		this.cid = Integer.parseInt(type);
+		if(type == null) {
+			this.cid = 0;
+		} else {
+			this.cid = Integer.parseInt(type);
+		}
 	}
 
 	public void setCid(int type) {

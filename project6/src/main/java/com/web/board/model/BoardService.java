@@ -68,6 +68,13 @@ public class BoardService {
 		return datas;
 	}
 	
+	public List<BoardDTO> search(BoardDTO dto) {
+		BoardDAO dao = new BoardDAO();
+		List<BoardDTO> datas = dao.selectSearch(dto);
+		dao.close();
+		return datas;
+	}
+	
 	public BoardDTO getData(BoardDTO dto) {
 		BoardDAO dao = new BoardDAO();
 		BoardDTO data = dao.selectOne(dto);

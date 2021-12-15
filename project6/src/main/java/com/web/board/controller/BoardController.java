@@ -21,15 +21,21 @@ public class BoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String type = request.getParameter("type");
-
+		String search = request.getParameter("search");
+		
+		BoardDTO dto = new BoardDTO();
+		dto.setCid(type);
+		dto.setTitle(search);
+		
 		BoardService service = new BoardService();
-		List<BoardDTO> datas = service.getList();
+		
+		List<BoardDTO> datas = service.search(dto);
+
 		List<BoardCategoryDTO> category = service.getCategory();
 
-		request.setAttribute("type", type);
 		request.setAttribute("datas", datas);
 		request.setAttribute("category", category);
-
+		
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 

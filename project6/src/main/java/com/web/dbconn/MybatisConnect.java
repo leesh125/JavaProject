@@ -21,7 +21,7 @@ public class MybatisConnect {
 		try {
 			InputStream is = Resources.getResourceAsStream(resource);
 			SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-			this.sess = builder.build(is).openSession();
+			this.sess = builder.build(is).openSession(false); // AutoCommit 비활성화
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

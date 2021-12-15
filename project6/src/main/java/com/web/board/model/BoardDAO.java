@@ -5,14 +5,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 
+import com.web.dbconn.MybatisConnect;
 import com.web.dbconn.OracleCloudConnect;
 
 public class BoardDAO {
 
+	private MybatisConnect mc = null;
+	private SqlSession sess = null;
 	OracleCloudConnect occ = null;
 
 	public BoardDAO() {
+		this.mc = new MybatisConnect();
+		this.sess = mc.getSession();
 		this.occ = new OracleCloudConnect(true);
 	}
 	
@@ -157,16 +163,35 @@ public class BoardDAO {
 		return res;
 	}
 	
+	public List<BoardDTO> selectSearch(BoardDTO dto) {
+		List<BoardDTO> list_data = new ArrayList<BoardDTO>();
+		list_data.add(new BoardDTO(11));
+		list_data.add(new BoardDTO(12));
+		list_data.add(new BoardDTO(13));
+		list_data.add(new BoardDTO(14));
+		list_data.add(new BoardDTO(22));
+		list_data.add(new BoardDTO(23));
+		list_data.add(new BoardDTO(24));
+		list_data.add(new BoardDTO(25));
+		
+		List<BoardDTO> datas = this.sess.selectList(
+				"BoardMapper.boardSearch", dto);
+		return datas;
+	}
+	
 	public void commit() {
 		occ.commit();
+		mc.commit();
 	}
 
 	public void rollback() {
 		occ.rollback();
+		mc.rollback();
 	}
 
 	public void close() {
 		occ.close();
+		mc.close();
 	}
 
 }
