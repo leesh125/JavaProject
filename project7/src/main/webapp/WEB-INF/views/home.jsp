@@ -6,6 +6,10 @@
 <html>
 <head>
 	<title>Home</title>
+	<link type="text/css" rel="stylesheet" href="/static/bs-5.1.3/css/bootstrap.min.css">
+	<script type="text/javascript" src="/static/bs-5.1.3/js/popper.min.js"></script>
+	<script type="text/javascript" src="/static/bs-5.1.3/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/static/jquery/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <h1>
@@ -13,5 +17,6 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+<img alt="정적이미지 불러오기" src="/img/illustration.png">
 </body>
 </html>

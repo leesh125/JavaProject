@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+   
+  <properties url="file:///C:/Users/leesh/oracle_connection.prop">
+  	<property name="oracleDriver" value="oracle.jdbc.driver.OracleDriver" />
+  </properties>
+  <settings>
+     <setting name="jdbcTypeForNull" value="null"/>
+    </settings>
+  <typeAliases>
+  	<typeAlias type="com.web.project7.account.model.AccountDTO" alias="account" />
+  </typeAliases>
+</configuration>
