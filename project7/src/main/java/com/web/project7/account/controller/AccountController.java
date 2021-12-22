@@ -1,7 +1,13 @@
 package com.web.project7.account.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +22,9 @@ public class AccountController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
+	@Autowired
+	AccountService service;
+	
 	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public String join() {
 		/*
@@ -46,9 +55,7 @@ public class AccountController {
 				account.getPassword()[0], account.getPassword()[1], 
 				account.getEmail());
 		
-		// service 생성
-		AccountService service = new AccountService();
-		
+	
 		// service에 가입 요청(데이터는 DTO에 담아서 잔달)
 		AccountDTO dto = new AccountDTO();
 		dto.setUsername(account.getUsername());
@@ -57,16 +64,49 @@ public class AccountController {
 		
 		
 		// 처리 결과에 따라서 다음의 로직 수행
-		boolean result = false;
-		
-		if(result) {
-			// 성공: 메인 페이지 또는 로그인 페이지로 리다이렉트
-			return "redirect:/account/login";
-		} else {
-			// 실패: 다시 회원가입 페이지 양식 전달(기존에 입력한값으로 초기화하여 전달)
-			return "account/join";
-		}
+		boolean result = service.join(dto);
+
+		// 처리 결과에 따라서 다음의 로직 수행
+				if(result) {
+					// 성공: 메인 페이지 또는 로그인 페이지로 리다이렉트
+					return "redirect:/account/login";
+				} else {
+					// 실패: 다시 회원가입 페이지 양식 전달(기존에 입력한 값으로 초기화하여 전달)
+					return "account/join";
+				}
 	}
 	
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String login() {
+		return "account/login";
+	}
+
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String login(String username, String password, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+
+		Cookie[] cookies = request.getCookies();
+		for(Cookie cookie: cookies) {
+			if(cookie.getName().equals("cookie_name")) {
+				cookie.getValue();
+			}
+		}
+		
+		response.addCookie(new Cookie("cookie_name", "cookie_value"));
+		
+		AccountDTO dto = new AccountDTO();
+		dto.setUsername(username);
+		dto.setPassword(password);
+
+		boolean result = service.login(dto);
+
+		if(result) {
+			session.setAttribute("logined", true);
+			session.setAttribute("account", dto);
+		} else {
+			session.setAttribute("logined", false);
+		}
+
+		return "redirect:/";
+	}
 	
 }

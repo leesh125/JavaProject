@@ -29,7 +29,7 @@
 	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<beans:property name="driverClassName" value="oracle.jdbc.OracleDriver"></beans:property>
 		<beans:property name="url" value="${url}"></beans:property>
-		<beans:property name="username" value="${name}"></beans:property>
+		<beans:property name="username" value="${username}"></beans:property>
 		<beans:property name="password" value="${password}"></beans:property>
 	</beans:bean>
 	

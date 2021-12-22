@@ -19,8 +19,7 @@
 <head lang="ko">
     <meta charset="UTF-8">
     <title>메인 화면</title>
-    <c:url var="head_url" value="/WEB-INF/views/module/default_js_css.jsp" />
-    <jsp:include page="${head_url}" flush="false" />
+    <jsp:include page="/WEB-INF/views/module/default_js_css.jsp" flush="false" />
 </head>
 <body>
 	<header>
@@ -28,6 +27,8 @@
 			<jsp:param name="logined" value="${empty sessionScope.logined ? false : true }" />
 		</jsp:include>
 	</header>
-	<h1><%-- ${dto.getUsername() }  --%>님 환영합니다.</h1>
+	<c:if test="${sessionScope.logined}">
+		<h1>${sessionScope.account.username}님 환영합니다.</h1>
+	</c:if>
 </body>
 </html> 

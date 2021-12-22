@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="javax.servlet.http.HttpSession, com.web.project7.account.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -24,8 +23,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>회원 가입 폼</title>
-	<c:url var="head_url" value="/WEB-INF/views/module/default_js_css.jsp" />
-    <jsp:include page="${head_url}" flush="false" />
+	<jsp:include page="/WEB-INF/views/module/default_js_css.jsp" flush="false" />
 </head>
 <body>
 	<header>
@@ -64,7 +62,7 @@
 						<label class="col-sm-2 col-form-label" for="id_email">E-Mail</label>
 						<div class="col-sm-10">
 							<input class="form-control" type="email" id="id_email"
-								name="email" value="${param.email }" required>
+								name="email" value="${accountVO.email }" required>
 						</div>
 					</div>
 					<div class="row mb-3">
